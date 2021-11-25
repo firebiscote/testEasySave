@@ -30,7 +30,7 @@ namespace testEasySave.Model.Service
             }
         }
 
-        public void CreateSaveJob(ISaveJob saveJob)
+        public void Create(ISaveJob saveJob)
         {
             saveJobs.Add(saveJob.Name, saveJob);
             string fileName = SAVE_JOB_PATH + saveJob.Name + FILE;
@@ -38,7 +38,15 @@ namespace testEasySave.Model.Service
             File.WriteAllText(fileName, json);
         }
 
-        public void DeleteSaveJob(string name)
+        public void DeleteAll() {
+            foreach (KeyValuePair<string, ISaveJob> saveJob in saveJobs)
+            {
+                File.Delete(SAVE_JOB_PATH + saveJob.Key + FILE);
+                saveJobs.Remove(saveJob.Key);
+            }
+        }
+
+        public void Delete(string name)
         {
             File.Delete(SAVE_JOB_PATH + name + FILE);
             saveJobs.Remove(name);

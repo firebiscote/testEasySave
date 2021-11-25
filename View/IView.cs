@@ -1,4 +1,5 @@
-﻿using testEasySave.Controller;
+﻿using System;
+using testEasySave.Controller;
 
 namespace testEasySave.View
 {
@@ -7,6 +8,7 @@ namespace testEasySave.View
         public IController Controller { get; set; }
 
         public void Start() { }
+        public void Display(string message, ConsoleColor color);
         public void DisplaySuccess(string message) { }
         public void DisplayError(string message) { }
     }

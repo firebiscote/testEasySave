@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using testEasySave.Model;
 using testEasySave.Model.Service;
 using testEasySave.View;
@@ -20,9 +19,23 @@ namespace testEasySave.Controller
         {
             this.command = command;
             Parse();
-            Model.Process(action, arguments);
-            View.DisplaySuccess(TraductionService.Instance.GetSuccessMessage());
+            bool isException = false;
+            try
+            {
+                Model.Process(action, arguments);
+            }
+            catch (Exception e) 
+            {
+                isException = true;
+                if (e.Message == null)
+                    View.DisplayError(TraductionService.Instance.GetErrorMessage());
+                else
+                    View.DisplayError(e.Message);
+            }
+            if (!isException)
+                View.DisplaySuccess(TraductionService.Instance.GetSuccessMessage());
         }
+
         private void Parse()
         {
             List<string> commandSplited = command.Split(" ").ToList();

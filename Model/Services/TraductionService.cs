@@ -38,12 +38,32 @@ namespace testEasySave.Model.Service
             language = ENGLISH;
         }
 
+        public string GetHelpMessage()
+        {
+            return language switch
+            {
+                ENGLISH => "Here is a list of functions with their parameters:",
+                FRENCH => "Voici une liste des fonctions avec leurs paramètres :",
+                _ => throw new NotImplementedLanguageException()
+            };
+        }
+
         public string GetSuccessMessage()
         {
-            return Language switch
+            return language switch
             {
-                ENGLISH => "Successfull operation !",
+                ENGLISH => "Successfull operation!",
                 FRENCH => "Opération réussie !",
+                _ => throw new NotImplementedLanguageException()
+            };
+        }
+
+        public string GetErrorMessage()
+        {
+            return language switch
+            {
+                ENGLISH => "An error has occure!",
+                FRENCH => "Une erreur s'est produite !",
                 _ => throw new NotImplementedLanguageException()
             };
         }

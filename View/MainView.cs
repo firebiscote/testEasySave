@@ -26,7 +26,7 @@ namespace testEasySave.View
             Console.WriteLine(" | |___| (_| \\__ \\ |_| |  ____) | (_| |\\ V /  __/  | || |_| | |_| |");
             Console.WriteLine(" |______\\__,_|___/\\__, | |_____/ \\__,_| \\_/ \\___|  |_(_)___(_)___/ ");
             Console.WriteLine("                   __/ |");
-            Console.WriteLine("                  |___/ \n\n");
+            Console.WriteLine("                  |___/ \n\n\n\n\n");
         }
 
         public void WaitForInstruction()
@@ -36,20 +36,22 @@ namespace testEasySave.View
             this.Controller.Transmit(command);
         }
 
-        public void DisplaySuccess(string message)
+        public void Display(string message, ConsoleColor color)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
             WaitForInstruction();
         }
 
+        public void DisplaySuccess(string message)
+        {
+            Display(message, ConsoleColor.Green);
+        }
+
         public void DisplayError(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(message);
-            Console.ForegroundColor = ConsoleColor.White;
-            WaitForInstruction();
+            Display(message, ConsoleColor.Red);
         }
     }
 }

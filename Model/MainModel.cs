@@ -28,6 +28,7 @@ namespace testEasySave.Model
                 { "delete", Delete },
                 { "execute", Execute },
                 { "setLang", SetLang },
+                { "help", Help },
                 { "quit", Quit }
             };
         }
@@ -41,12 +42,15 @@ namespace testEasySave.Model
         private void Create()
         {
             ISaveJob newSaveJob = SaveJobFactory.Instance.GetNewSaveJob(args["-n"], args["-sd"], args["-td"], args["-t"]);
-            saveJobService.CreateSaveJob(newSaveJob);
+            saveJobService.Create(newSaveJob);
         }
 
         private void Delete()
         {
-            saveJobService.DeleteSaveJob(args["-n"]);
+            if (args.Count == 0)
+                saveJobService.DeleteAll();
+            else
+                saveJobService.Delete(args["-n"]);
         }
 
         private void Execute()
@@ -60,6 +64,16 @@ namespace testEasySave.Model
         private void SetLang()
         {
             TraductionService.Instance.Language = args["-l"];
+        }
+
+        private void Help()
+        {
+            throw new Exception(TraductionService.Instance.GetHelpMessage() +
+                                "\n=> create -n name -sd sourceDirectory -td targetDirectory -t type" +
+                                "\n=> delete {-n name}" +
+                                "\n=> execute {-n name}" +
+                                "\n=> setLang -l language" +
+                                "\n=> quit");
         }
 
         private void Quit()
