@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using testEasySave.Model;
+using testEasySave.View;
+
+namespace testEasySave.Controller
+{
+    public class CommandController : IController
+    {
+        private string command;
+        private string action;
+        private Dictionary<string, string> arguments;
+        public IView View { get; set; }
+        public IModel Model { get; set; }
+
+        void IController.Transmit(string command)
+        {
+            this.command = command;
+            Parse();
+            Model.Process(action, arguments);
+            View.DisplaySuccess("Opération réussie !");
+        }
+        private void Parse()
+        {
+            List<string> commandSplited = command.Split(" ").ToList();
+            action = commandSplited[0];
+            arguments = new Dictionary<string, string>();
+            for (int i = 1; i < commandSplited.Count()-1; i += 2)
+                arguments.Add(commandSplited[i], commandSplited[i + 1]);
+        }
+    }
+}

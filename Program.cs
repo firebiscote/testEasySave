@@ -1,4 +1,8 @@
 ﻿using System;
+using testEasySave.Model.Data.ToolBox;
+using testEasySave.Model.Data.SaveJob.SaveJobFactory;
+using testEasySave.Model.Service;
+using testEasySave.Model.Data.Job;
 
 namespace testEasySave
 {
@@ -6,7 +10,7 @@ namespace testEasySave
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            EasySave easySave = new EasySave();
         }
     }
 }
