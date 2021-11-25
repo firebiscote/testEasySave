@@ -24,8 +24,8 @@ namespace testEasySave.Model.Data.SaveJob.SaveJobFactory
         {
             return type switch
             {
-                SaveJobType.COMPLETE => new CompleteSaveJob(name, sourceDirectory, targetDirectory),
-                SaveJobType.DIFFERENTIAL => new DifferentialSaveJob(name, sourceDirectory, targetDirectory),
+                SaveJobType.Complete => new CompleteSaveJob(name, sourceDirectory, targetDirectory),
+                SaveJobType.Differential => new DifferentialSaveJob(name, sourceDirectory, targetDirectory),
                 _ => throw new KeyNotFoundException()
             };
         }

@@ -1,32 +1,41 @@
-﻿using testEasySave.Model.Data.ToolBox;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace testEasySave.Model.Data.Job
 {
     class DifferentialSaveJob : ISaveJob
     {
-        private string name;
-        private string sourceDirectory;
-        private string targetDirectory;
-        private string type;
-
-        string ISaveJob.Name { get => name; }
-        string ISaveJob.SourceDirectory { get => sourceDirectory; }
-        string ISaveJob.TargetDirectory { get => targetDirectory; }
-        string ISaveJob.Type { get => type; }
+        public string Name { get; set; }
+        public string SourceDirectory { get; set; }
+        public string TargetDirectory { get; set; }
+        public string Type { get; set; }
 
         private DifferentialSaveJob() { }
 
         public DifferentialSaveJob(string name, string sourceDirectory, string targetDirectory)
         {
-            this.name = name;
-            this.sourceDirectory = sourceDirectory;
-            this.targetDirectory = targetDirectory;
-            this.type = "Differential";
+            Name = name;
+            SourceDirectory = sourceDirectory;
+            TargetDirectory = targetDirectory;
+            Type = "Differential";
         }
 
-        void ISaveJob.Execute()
+        public void Execute()
         {
+            List<string> files = GetFiles();
+            foreach (string file in files.ToArray())
+            {
+                string fileName = file[file.LastIndexOf('\\')..];
+                File.Copy(file, TargetDirectory + fileName);
+                files.Remove(file);
+            }
+        }
 
+        public List<string> GetFiles()
+        {
+            return Directory.GetFiles(SourceDirectory, "*", SearchOption.AllDirectories).ToList();
         }
     }
 }

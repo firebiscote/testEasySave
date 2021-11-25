@@ -2,7 +2,7 @@
 {
     public enum SaveJobState : int
     {
-        ACTIVE = 1,
-        END = 0
+        Active = 1,
+        End = 0
     }
 }

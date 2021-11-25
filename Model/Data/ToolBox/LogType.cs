@@ -2,7 +2,7 @@
 {
     public enum LogType
     {
-        JOURNAL,
-        STATE
+        Journal,
+        State
     }
 }

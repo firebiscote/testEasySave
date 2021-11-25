@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using testEasySave.View;
+﻿using testEasySave.View;
 using testEasySave.Controller;
 using testEasySave.Model;
 

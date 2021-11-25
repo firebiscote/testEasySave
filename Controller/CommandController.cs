@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using testEasySave.Model;
+using testEasySave.Model.Service;
 using testEasySave.View;
 
 namespace testEasySave.Controller
@@ -20,7 +21,7 @@ namespace testEasySave.Controller
             this.command = command;
             Parse();
             Model.Process(action, arguments);
-            View.DisplaySuccess("Opération réussie !");
+            View.DisplaySuccess(TraductionService.Instance.GetSuccessMessage());
         }
         private void Parse()
         {

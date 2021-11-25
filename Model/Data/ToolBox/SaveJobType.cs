@@ -2,7 +2,7 @@
 {
     public enum SaveJobType
     {
-        COMPLETE,
-        DIFFERENTIAL
+        Complete,
+        Differential
     }
 }

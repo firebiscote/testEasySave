@@ -1,40 +1,42 @@
-﻿using testEasySave.Model.Data.ToolBox;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Data.Job
 {
     public class CompleteSaveJob : ISaveJob
     {
-        private string name;
-        private string sourceDirectory;
-        private string targetDirectory;
-        private string type;
+        public string Name { get; set; }
+        public string SourceDirectory { get; set; }
+        public string TargetDirectory { get; set; }
+        public string Type { get; set; }
 
-        string ISaveJob.Name { get => name; }
-        string ISaveJob.SourceDirectory { get => sourceDirectory; }
-        string ISaveJob.TargetDirectory { get => targetDirectory; }
-        string ISaveJob.Type { get => type; }
-
-        public CompleteSaveJob() { }
-
-        public CompleteSaveJob(string Name, string SourceDirectory, string TargetDirectory, string Type)
-        {
-            this.name = Name;
-            this.sourceDirectory = SourceDirectory;
-            this.targetDirectory = TargetDirectory;
-            this.type = Type;
-        }
+        private CompleteSaveJob() { }
 
         public CompleteSaveJob(string name, string sourceDirectory, string targetDirectory)
         {
-            this.name = name;
-            this.sourceDirectory = sourceDirectory;
-            this.targetDirectory = targetDirectory;
-            this.type = "Complete";
+            Name = name;
+            SourceDirectory = sourceDirectory;
+            TargetDirectory = targetDirectory;
+            Type = "Complete";
         }
 
-        void ISaveJob.Execute()
+        public void Execute()
         {
+            List<string> files = GetFiles();
+            foreach (string file in files.ToArray())
+            {
+                string fileName = file[file.LastIndexOf('\\')..];
+                File.Copy(file, TargetDirectory + fileName);
+                files.Remove(file);
+            }
+        }
 
+        public List<string> GetFiles()
+        {
+            return Directory.GetFiles(SourceDirectory, "*", SearchOption.AllDirectories).ToList();
         }
     }
 }
