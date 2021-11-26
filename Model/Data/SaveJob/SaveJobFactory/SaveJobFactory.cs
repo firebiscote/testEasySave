@@ -14,7 +14,7 @@ namespace testEasySave.Model.Data.SaveJob.SaveJobFactory
         {
             return type.ToLower() switch
             {
-                "complete" => new CompleteSaveJob(name, sourceDirectory, targetDirectory),
+                "full" => new FullSaveJob(name, sourceDirectory, targetDirectory),
                 "differential" => new DifferentialSaveJob(name, sourceDirectory, targetDirectory),
                 _ => throw new KeyNotFoundException()
             };
@@ -24,7 +24,7 @@ namespace testEasySave.Model.Data.SaveJob.SaveJobFactory
         {
             return type switch
             {
-                SaveJobType.Complete => new CompleteSaveJob(name, sourceDirectory, targetDirectory),
+                SaveJobType.Full => new FullSaveJob(name, sourceDirectory, targetDirectory),
                 SaveJobType.Differential => new DifferentialSaveJob(name, sourceDirectory, targetDirectory),
                 _ => throw new KeyNotFoundException()
             };

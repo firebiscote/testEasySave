@@ -20,7 +20,7 @@ namespace testEasySave.Model.Service
         private const string FRENCH = "fr";
         private readonly List<string> availableLanguages;
         private string language;
-        public string Language 
+        public string Language
         {
             get => language;
             set
@@ -64,6 +64,16 @@ namespace testEasySave.Model.Service
             {
                 ENGLISH => "An error has occure!",
                 FRENCH => "Une erreur s'est produite !",
+                _ => throw new NotImplementedLanguageException()
+            };
+        }
+
+        public string GetParameterErrorMessage(string parameter)
+        {
+            return language switch
+            {
+                ENGLISH => "A parameter is missing : " + parameter,
+                FRENCH => parameter + "Un paramètre est manquant : " + parameter,
                 _ => throw new NotImplementedLanguageException()
             };
         }

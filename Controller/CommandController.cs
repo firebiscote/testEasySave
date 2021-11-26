@@ -27,10 +27,7 @@ namespace testEasySave.Controller
             catch (Exception e) 
             {
                 isException = true;
-                if (e.Message == null)
-                    View.DisplayError(TraductionService.Instance.GetErrorMessage());
-                else
-                    View.DisplayError(e.Message);
+                HandleError(e.Message);
             }
             if (!isException)
                 View.DisplaySuccess(TraductionService.Instance.GetSuccessMessage());
@@ -43,6 +40,20 @@ namespace testEasySave.Controller
             arguments = new Dictionary<string, string>();
             for (int i = 1; i < commandSplited.Count()-1; i += 2)
                 arguments.Add(commandSplited[i], commandSplited[i + 1]);
+        }
+
+        private void HandleError(string message)
+        {
+            if (message == null)
+                View.DisplayError(TraductionService.Instance.GetErrorMessage());
+            else
+            {
+                if (message.Contains("-"))
+                    View.DisplayError(TraductionService.Instance.GetParameterErrorMessage(message[message.IndexOf('-')..message.LastIndexOf("'")]));
+                else
+                    View.DisplayError(message);
+            }
+                View.DisplayError(message);
         }
     }
 }

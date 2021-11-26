@@ -66,7 +66,7 @@ namespace testEasySave.Model.Service
         private ISaveJob DeSerializeSaveJob(string json)
         {
             if (json.Contains("Complete"))
-                return JsonSerializer.Deserialize<CompleteSaveJob>(json);
+                return JsonSerializer.Deserialize<FullSaveJob>(json);
             else if (json.Contains("Differential"))
                 return JsonSerializer.Deserialize<DifferentialSaveJob>(json);
             else

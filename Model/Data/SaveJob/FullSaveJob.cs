@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Data.Job
 {
-    public class CompleteSaveJob : ISaveJob
+    public class FullSaveJob : ISaveJob
     {
         public string Name { get; set; }
         public string SourceDirectory { get; set; }
         public string TargetDirectory { get; set; }
         public string Type { get; set; }
 
-        private CompleteSaveJob() { }
+        private FullSaveJob() { }
 
-        public CompleteSaveJob(string name, string sourceDirectory, string targetDirectory)
+        public FullSaveJob(string name, string sourceDirectory, string targetDirectory)
         {
             Name = name;
             SourceDirectory = sourceDirectory;
             TargetDirectory = targetDirectory;
-            Type = "Complete";
+            Type = "Full";
         }
 
         public void Execute()
