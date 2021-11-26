@@ -28,8 +28,13 @@ namespace testEasySave.Model.Data.Job
             foreach (string file in files.ToArray())
             {
                 string fileName = file[file.LastIndexOf('\\')..];
-                File.Copy(file, TargetDirectory + fileName);
-                files.Remove(file);
+                string targetFile = TargetDirectory + fileName;
+                if (!File.Exists(targetFile) || File.GetLastWriteTime(targetFile) < File.GetLastWriteTime(file))
+                {
+                    File.Delete(targetFile);
+                    File.Copy(file, targetFile);
+                    files.Remove(file);
+                }
             }
         }
 

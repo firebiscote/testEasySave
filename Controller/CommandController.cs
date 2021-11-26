@@ -15,7 +15,7 @@ namespace testEasySave.Controller
         public IView View { get; set; }
         public IModel Model { get; set; }
 
-        void IController.Transmit(string command)
+        public void Transmit(string command)
         {
             this.command = command;
             Parse();
