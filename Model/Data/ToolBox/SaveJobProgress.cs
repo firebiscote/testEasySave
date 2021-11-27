@@ -2,17 +2,17 @@
 {
     public class SaveJobProgress
     {
-        public int TotalFileToCopy { get; }
-        public double TotalFileSize { get; }
-        public string ActualFileSourcePath { get; }
-        public string ActualFileTargetPath { get; }
+        public int TotalFilesToCopy { get; }
+        public double TotalFilesToCopySize { get; }
+        public string ActualSourceFileName { get; }
+        public string ActualTargetFileName { get; }
 
         public SaveJobProgress(int totalFileToCopy, double totalFileSize, string actualFileSourcePath, string actualFileTargetPath)
         {
-            TotalFileToCopy = totalFileToCopy;
-            TotalFileSize = totalFileSize;
-            ActualFileSourcePath = actualFileSourcePath;
-            ActualFileTargetPath = actualFileTargetPath;
+            TotalFilesToCopy = totalFileToCopy;
+            TotalFilesToCopySize = totalFileSize;
+            ActualSourceFileName = actualFileSourcePath;
+            ActualTargetFileName = actualFileTargetPath;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using testEasySave.Exceptions;
 
-namespace testEasySave.Model.Service
+namespace testEasySave.Model.Services
 {
     class TraductionService : IService
     {
@@ -16,8 +16,6 @@ namespace testEasySave.Model.Service
             }
         }
 
-        private const string ENGLISH = "en";
-        private const string FRENCH = "fr";
         private readonly List<string> availableLanguages;
         private string language;
         public string Language
@@ -34,16 +32,16 @@ namespace testEasySave.Model.Service
 
         private TraductionService()
         {
-            availableLanguages = new List<string>() { ENGLISH, FRENCH };
-            language = ENGLISH;
+            availableLanguages = new List<string>() { Parameters.English, Parameters.French };
+            language = Parameters.English;
         }
 
         public string GetHelpMessage()
         {
             return language switch
             {
-                ENGLISH => "Here is a list of functions with their parameters:",
-                FRENCH => "Voici une liste des fonctions avec leurs paramètres :",
+                Parameters.English => "Here is a list of functions with their parameters:",
+                Parameters.French => "Voici une liste des fonctions avec leurs paramètres :",
                 _ => throw new NotImplementedLanguageException()
             };
         }
@@ -52,8 +50,8 @@ namespace testEasySave.Model.Service
         {
             return language switch
             {
-                ENGLISH => "Successfull operation!",
-                FRENCH => "Opération réussie !",
+                Parameters.English => "Successfull operation!",
+                Parameters.French => "Opération réussie !",
                 _ => throw new NotImplementedLanguageException()
             };
         }
@@ -62,8 +60,8 @@ namespace testEasySave.Model.Service
         {
             return language switch
             {
-                ENGLISH => "An error has occure!",
-                FRENCH => "Une erreur s'est produite !",
+                Parameters.English => "An error has occure!",
+                Parameters.French => "Une erreur s'est produite !",
                 _ => throw new NotImplementedLanguageException()
             };
         }
@@ -72,8 +70,8 @@ namespace testEasySave.Model.Service
         {
             return language switch
             {
-                ENGLISH => "A parameter is missing : " + parameter,
-                FRENCH => parameter + "Un paramètre est manquant : " + parameter,
+                Parameters.English => "A parameter is missing : " + parameter,
+                Parameters.French => parameter + "Un paramètre est manquant : " + parameter,
                 _ => throw new NotImplementedLanguageException()
             };
         }

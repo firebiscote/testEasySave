@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using testEasySave.Model;
-using testEasySave.Model.Service;
+using testEasySave.Model.Services;
 using testEasySave.View;
 
 namespace testEasySave.Controller
@@ -35,7 +35,7 @@ namespace testEasySave.Controller
 
         private void Parse()
         {
-            List<string> commandSplited = command.Split(" ").ToList();
+            List<string> commandSplited = command.Split(Parameters.CommandSeparator).ToList();
             action = commandSplited[0];
             arguments = new Dictionary<string, string>();
             for (int i = 1; i < commandSplited.Count()-1; i += 2)
@@ -48,12 +48,11 @@ namespace testEasySave.Controller
                 View.DisplayError(TraductionService.Instance.GetErrorMessage());
             else
             {
-                if (message.Contains("-"))
-                    View.DisplayError(TraductionService.Instance.GetParameterErrorMessage(message[message.IndexOf('-')..message.LastIndexOf("'")]));
+                if (message.Contains(Parameters.ErrorArgumentDelimiter))
+                    View.DisplayError(TraductionService.Instance.GetParameterErrorMessage(message[message.IndexOf(Parameters.ErrorArgumentDelimiter)..message.LastIndexOf(Parameters.ErrorArgumentDelimiter)]));
                 else
                     View.DisplayError(message);
             }
-                View.DisplayError(message);
         }
     }
 }

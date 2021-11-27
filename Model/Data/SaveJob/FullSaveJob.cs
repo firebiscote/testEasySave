@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Data.Job
 {
@@ -18,17 +20,19 @@ namespace testEasySave.Model.Data.Job
             Name = name;
             SourceDirectory = sourceDirectory;
             TargetDirectory = targetDirectory;
-            Type = "Full";
+            Type = Parameters.FullSaveJobType;
         }
 
         public void Execute()
         {
             List<string> files = GetFiles();
-            foreach (string file in files.ToArray())
+            foreach (string fileName in files.ToArray())
             {
-                string fileName = file[file.LastIndexOf('\\')..];
-                File.Copy(file, TargetDirectory + fileName);
-                files.Remove(file);
+                FileInfo file = new FileInfo(fileName);
+                StartCopy.Invoke(this, EventArgs.Empty);
+                file.CopyTo(TargetDirectory + file.Name);
+                FileCopied.Invoke(this, new FileEventArgs(file));
+                files.Remove(fileName);
             }
         }
 
@@ -36,5 +40,8 @@ namespace testEasySave.Model.Data.Job
         {
             return Directory.GetFiles(SourceDirectory, "*", SearchOption.AllDirectories).ToList();
         }
+
+        public static event EventHandler StartCopy;
+        public static event EventHandler<FileEventArgs> FileCopied;
     }
 }

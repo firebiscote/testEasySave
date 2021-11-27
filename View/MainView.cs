@@ -19,19 +19,17 @@ namespace testEasySave.View
 
         private void SayHello()
         {
-            Console.WriteLine("  ______                   _____                   __   ___   ___");
-            Console.WriteLine(" |  ____|                 / ____|                 /_ | / _ \\ / _ \\ ");
-            Console.WriteLine(" | |__   __ _ ___ _   _  | (___   __ ___   _____   | || | | | | | |");
-            Console.WriteLine(" |  __| / _` / __| | | |  \\___ \\ / _` \\ \\ / / _ \\  | || | | | | | |");
-            Console.WriteLine(" | |___| (_| \\__ \\ |_| |  ____) | (_| |\\ V /  __/  | || |_| | |_| |");
-            Console.WriteLine(" |______\\__,_|___/\\__, | |_____/ \\__,_| \\_/ \\___|  |_(_)___(_)___/ ");
-            Console.WriteLine("                   __/ |");
-            Console.WriteLine("                  |___/ \n\n\n\n\n");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            foreach (string line in Parameters.Hello)
+                Console.WriteLine(line);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
         }
 
         public void WaitForInstruction()
         {
-            Console.Write("=> ");
+            Console.Write(Parameters.CommandIndent);
             string command = Console.ReadLine();
             this.Controller.Transmit(command);
         }

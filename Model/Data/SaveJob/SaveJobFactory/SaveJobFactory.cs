@@ -14,8 +14,8 @@ namespace testEasySave.Model.Data.SaveJob.SaveJobFactory
         {
             return type.ToLower() switch
             {
-                "full" => new FullSaveJob(name, sourceDirectory, targetDirectory),
-                "differential" => new DifferentialSaveJob(name, sourceDirectory, targetDirectory),
+                Parameters.FullSaveJobType => new FullSaveJob(name, sourceDirectory, targetDirectory),
+                Parameters.DifferencialSaveJobType => new DifferentialSaveJob(name, sourceDirectory, targetDirectory),
                 _ => throw new KeyNotFoundException()
             };
         }

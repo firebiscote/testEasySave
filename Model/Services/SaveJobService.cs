@@ -3,26 +3,23 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 using testEasySave.Model.Data.Job;
+using testEasySave.Model.Data.ToolBox;
 
-namespace testEasySave.Model.Service
+namespace testEasySave.Model.Services
 {
     public class SaveJobService : IService
     {
-        private const int MAX_SAVE_JOB = 5;
-        private const string FILE = ".json";
-        private const string FILE_PATTERN = "*" + FILE;
-        private const string SAVE_JOB_PATH = "C:\\\\Users\\\\maxim\\\\Desktop\\\\test\\\\saveJob\\\\";
         public FixedSizeDictionary<string, ISaveJob> saveJobs;
 
         public SaveJobService()
         {
-            saveJobs = new FixedSizeDictionary<string, ISaveJob>(MAX_SAVE_JOB);
+            saveJobs = new FixedSizeDictionary<string, ISaveJob>(Parameters.MaxSaveJob);
             InitSaveJobs();
         }
 
         private void InitSaveJobs()
         {
-            foreach (string fileName in Directory.GetFiles(SAVE_JOB_PATH, FILE_PATTERN))
+            foreach (string fileName in Directory.GetFiles(Parameters.SaveJobDirectory, Parameters.FilePattern))
             {
                 string json = File.ReadAllText(fileName);
                 ISaveJob saveJob = DeSerializeSaveJob(json);
@@ -33,7 +30,7 @@ namespace testEasySave.Model.Service
         public void Create(ISaveJob saveJob)
         {
             saveJobs.Add(saveJob.Name, saveJob);
-            string fileName = SAVE_JOB_PATH + saveJob.Name + FILE;
+            string fileName = Parameters.SaveJobDirectory + saveJob.Name + Parameters.FileType;
             string json = SerializeSaveJob(saveJob);
             File.WriteAllText(fileName, json);
         }
@@ -41,14 +38,14 @@ namespace testEasySave.Model.Service
         public void DeleteAll() {
             foreach (KeyValuePair<string, ISaveJob> saveJob in saveJobs)
             {
-                File.Delete(SAVE_JOB_PATH + saveJob.Key + FILE);
+                File.Delete(Parameters.SaveJobDirectory + saveJob.Key + Parameters.FileType);
                 saveJobs.Remove(saveJob.Key);
             }
         }
 
         public void Delete(string name)
         {
-            File.Delete(SAVE_JOB_PATH + name + FILE);
+            File.Delete(Parameters.SaveJobDirectory + name + Parameters.FileType);
             saveJobs.Remove(name);
         }
 
@@ -65,9 +62,9 @@ namespace testEasySave.Model.Service
 
         private ISaveJob DeSerializeSaveJob(string json)
         {
-            if (json.Contains("Complete"))
+            if (json.Contains(Parameters.FullSaveJobType))
                 return JsonSerializer.Deserialize<FullSaveJob>(json);
-            else if (json.Contains("Differential"))
+            else if (json.Contains(Parameters.DifferencialSaveJobType))
                 return JsonSerializer.Deserialize<DifferentialSaveJob>(json);
             else
                 throw new Exception();
