@@ -19,12 +19,10 @@ namespace testEasySave.View
 
         private void SayHello()
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.White;
             foreach (string line in Parameters.Hello)
                 Console.WriteLine(line);
             Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Black;
         }
 
         public void WaitForInstruction()

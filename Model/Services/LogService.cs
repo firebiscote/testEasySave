@@ -24,7 +24,8 @@ namespace testEasySave.Model.Services
 
         private void SetHistoryLogFile()
         {
-            historyLogFile = new FileInfo(Parameters.HistoryLogDirectory + DateTime.Today + Parameters.FileType);
+            string historyLogName = Parameters.HistoryLogName + DateTime.Today.ToString("dd/MM/yy").Replace("/", "");
+            historyLogFile = new FileInfo(Parameters.HistoryLogDirectory + historyLogName + Parameters.FileType);
             if (!historyLogFile.Exists)
                 historyLogFile.Create();
         }

@@ -40,6 +40,7 @@
         public const string French = "fr";
 
         // separator or specification
+        public static string HistoryLogName = "log";
         public static string CommandSeparator = " ";
         public static string ErrorArgumentDelimiter = "'";
         public static int MaxSaveJob = 5;
