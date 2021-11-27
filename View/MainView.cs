@@ -31,7 +31,7 @@ namespace testEasySave.View
         {
             Console.Write(Parameters.CommandIndent);
             string command = Console.ReadLine();
-            this.Controller.Transmit(command);
+            Controller.Transmit(command);
         }
 
         public void Display(string message, ConsoleColor color)

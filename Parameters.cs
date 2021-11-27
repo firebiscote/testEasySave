@@ -2,20 +2,10 @@
 {
     public static class Parameters
     {
-        public static int MaxSaveJob = 5;
-        public static string FileType = ".json";
-        public static string FilePattern = "*" + FileType;
-        public static string SaveJobDirectory = "C:\\\\Users\\\\maxim\\\\Desktop\\\\test\\\\saveJob\\\\";
-        public static string CommandSeparator = " ";
-        public static string ErrorArgumentDelimiter = "'";
-        public const string FullSaveJobType = "full";
-        public const string DifferencialSaveJobType = "differential";
-        public static string LogEndState = "END";
-        public static string LogActiveState = "ACTIVE";
-        public static string HistoryLogDirectory = "C:\\\\Users\\\\maxim\\\\Desktop\\\\test\\\\log\\\\historyLog\\\\";
-        public const string English = "en";
-        public const string French = "fr";
-        public static readonly string VARIABLE;
+        // directory
+        public static string BaseDirectory = @"C:\\Users\\maxim\\";
+        public static string SaveJobDirectory = BaseDirectory + @"Desktop\\test\\saveJob\\";
+        public static string HistoryLogDirectory = BaseDirectory + @"Desktop\\test\\log\\historyLog\\";
 
         // visual effects
         public static string[] Hello = new string[] { @"  ______                   _____                   __   ___   ___  ",
@@ -45,5 +35,21 @@
         public static string Lang = "-l";
         public static string Directory = "-d";
 
+        // language
+        public const string English = "en";
+        public const string French = "fr";
+
+        // separator or specification
+        public static string CommandSeparator = " ";
+        public static string ErrorArgumentDelimiter = "'";
+        public static int MaxSaveJob = 5;
+        public static string FileType = ".json";
+        public static string FilePattern = "*" + FileType;
+
+        // state or type
+        public const string FullSaveJobType = "full";
+        public const string DifferencialSaveJobType = "differential";
+        public static string LogEndState = "END";
+        public static string LogActiveState = "ACTIVE";
     }
 }
