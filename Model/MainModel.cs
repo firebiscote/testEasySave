@@ -45,7 +45,7 @@ namespace testEasySave.Model
 
         private void Show()
         {
-            string saveJobsList = "";
+            string saveJobsList = "\n";
             foreach (ISaveJob saveJob in saveJobService.saveJobs.Values)
                 saveJobsList += Parameters.SaveJobStart + saveJob.Name + Parameters.SaveJobSeparator + saveJob.SourceDirectory + Parameters.DirectorySeparator + saveJob.TargetDirectory + Parameters.TypeSeparator + saveJob.Type + "\n";
             throw new ShowException(saveJobsList);

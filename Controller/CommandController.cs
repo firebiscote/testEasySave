@@ -35,6 +35,10 @@ namespace testEasySave.Controller
             {
                 HandleKeyNotFoundException(exception);
             }
+            catch (ArgumentException exception)
+            {
+                HandleArgumentException(exception);
+            }
             catch (NotImplementedLanguageException exception)
             {
                 HandleNotImplementedLanguageException(exception);
@@ -47,10 +51,10 @@ namespace testEasySave.Controller
             {
                 HandleShowException(exception);
             }
-            catch (Exception exception)
+            /*catch (Exception exception)
             {
                 HandleException(exception);
-            }
+            }*/
             if (!isException)
                 View.DisplaySuccess(TraductionService.Instance.GetSuccessMessage());
         }
@@ -78,6 +82,12 @@ namespace testEasySave.Controller
         {
             string errorMessage = e.Message[(e.Message.IndexOf(Parameters.ErrorArgumentDelimiter) + 1)..e.Message.LastIndexOf(Parameters.ErrorArgumentDelimiter)];
             View.DisplayError(TraductionService.Instance.GetParameterExceptionMessage(errorMessage));
+        }
+
+        private void HandleArgumentException(ArgumentException e)
+        {
+            string name = e.Message[e.Message.LastIndexOf(' ')..];
+            View.DisplayError(TraductionService.Instance.GetArgumentExceptionMessage(name));
         }
 
         private void HandleNotImplementedLanguageException(NotImplementedLanguageException e)

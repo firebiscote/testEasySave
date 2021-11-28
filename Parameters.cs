@@ -7,7 +7,10 @@ namespace testEasySave
         // directory
         public static string BaseDirectory = @"C:\\Users\\maxim\\";
         public static string SaveJobDirectory = BaseDirectory + @"Desktop\\test\\saveJob\\";
-        public static string HistoryLogDirectory = BaseDirectory + @"Desktop\\test\\log\\historyLog\\";
+        public static string LogFileDirectory = BaseDirectory + @"Desktop\\test\\log\\";
+        public static string HistoryLogDirectory = LogFileDirectory + @"historyLog\\";
+        public static string StateLogDirectory = LogFileDirectory + @"stateLog\\";
+        public static string StateLogFile = StateLogDirectory + "state" + FileType;
 
         // command keyword
         public static string Show = "show";
@@ -65,7 +68,7 @@ namespace testEasySave
                                                       @" | |___| (_| \__ \ |_| |  ____) | (_| |\ V /  __/  | || |_| | |_| |",
                                                       @" |______\__,_|___/\__, | |_____/ \__,_| \_/ \___|  |_(_)___(_)___/ ",
                                                       @"                   __/ |                                           ",
-                                                       "                  |___/                                            \n"};
+                                                       "                  |___/                                            "};
         public static string HelpMessage = "________________________________________________________________________\n" +
                                             TraductionService.Instance.GetHelpMessage() +
                                            "\n=> " + Show + " {" + Name + " name}" + 

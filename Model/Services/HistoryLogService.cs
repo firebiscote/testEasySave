@@ -8,7 +8,7 @@ using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Services
 {
-    public class HistoryLogService
+    public class HistoryLogService : IService
     {
         public static HistoryLogService Instance = new HistoryLogService();
         private FileInfo historyLogFile;

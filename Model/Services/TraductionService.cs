@@ -63,6 +63,16 @@ namespace testEasySave.Model.Services
             };
         }
 
+        public string GetArgumentExceptionMessage(string name)
+        {
+            return language switch
+            {
+                Parameters.English => name + " already exist!",
+                Parameters.French => name + " existe déjà !",
+                _ => throw new NotImplementedLanguageException()
+            };
+        }
+
         public string GetNotEnoughSpaceExceptionMessage()
         {
             return language switch
