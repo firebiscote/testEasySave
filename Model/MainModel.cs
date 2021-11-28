@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using testEasySave.Exceptions;
 using testEasySave.Model.Data.Job;
 using testEasySave.Model.Data.SaveJob.SaveJobFactory;
 using testEasySave.Model.Services;
@@ -10,15 +8,14 @@ namespace testEasySave.Model
 {
     public class MainModel : IModel
     {
-        private SaveJobService saveJobService;
-        private LogService logService;
+        private readonly SaveJobService saveJobService;
         private Dictionary<string, string> args;
         private Dictionary<string, Action> actions;
 
         public MainModel()
         {
             saveJobService = new SaveJobService();
-            logService = new LogService();
+            _ = HistoryLogService.Instance;
             InitActions();
         }
 

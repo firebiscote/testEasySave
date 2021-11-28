@@ -40,9 +40,16 @@
         public const string French = "fr";
 
         // separator or specification
-        public static string HistoryLogName = "log";
+        public static string HistoryLogNameStart = "log";
+        public static string HistoryLogDateSeparator = "/";
+        public static string HistoryLogNameSeparator = "-";
+        public static string HistoryLogDateFormat = "dd" + HistoryLogDateSeparator + "MM"+ HistoryLogDateSeparator + "yyyy";
+        public static string HistoryLogTimestampFormat = "T";
+
         public static string CommandSeparator = " ";
+        public static string ArgumentError = "key";
         public static string ErrorArgumentDelimiter = "'";
+
         public static int MaxSaveJob = 5;
         public static string FileType = ".json";
         public static string FilePattern = "*" + FileType;

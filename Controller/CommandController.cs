@@ -48,8 +48,8 @@ namespace testEasySave.Controller
                 View.DisplayError(TraductionService.Instance.GetErrorMessage());
             else
             {
-                if (message.Contains(Parameters.ErrorArgumentDelimiter))
-                    View.DisplayError(TraductionService.Instance.GetParameterErrorMessage(message[message.IndexOf(Parameters.ErrorArgumentDelimiter)..message.LastIndexOf(Parameters.ErrorArgumentDelimiter)]));
+                if (message.Contains(Parameters.ArgumentError))
+                    View.DisplayError(TraductionService.Instance.GetParameterErrorMessage(message[(message.IndexOf(Parameters.ErrorArgumentDelimiter)+1)..message.LastIndexOf(Parameters.ErrorArgumentDelimiter)]));
                 else
                     View.DisplayError(message);
             }

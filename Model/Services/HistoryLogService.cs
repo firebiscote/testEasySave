@@ -2,43 +2,36 @@
 using System.IO;
 using System.Text.Json;
 using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.Log;
-using testEasySave.Model.Data.Log.LogFactory;
+using testEasySave.Model.Data.Log.HistoryLog;
+using testEasySave.Model.Data.Log.HistoryLog.HistoryBuilder;
 using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Services
 {
-    public class LogService
+    public class HistoryLogService
     {
+        public static HistoryLogService Instance = new HistoryLogService();
         private FileInfo historyLogFile;
-        private DateTime copyStart;
 
-        public LogService()
+        private HistoryLogService()
         {
             SetHistoryLogFile();
-            FullSaveJob.StartCopy += SetStartTime;
-            DifferentialSaveJob.StartCopy += SetStartTime;
             FullSaveJob.FileCopied += HandleHistory;
             DifferentialSaveJob.FileCopied += HandleHistory;
         }
 
         private void SetHistoryLogFile()
         {
-            string historyLogName = Parameters.HistoryLogName + DateTime.Today.ToString("dd/MM/yy").Replace("/", "");
+            string historyLogName = Parameters.HistoryLogNameStart + DateTime.Today.ToString(Parameters.HistoryLogDateFormat).Replace(Parameters.HistoryLogDateSeparator, Parameters.HistoryLogNameSeparator);
             historyLogFile = new FileInfo(Parameters.HistoryLogDirectory + historyLogName + Parameters.FileType);
             if (!historyLogFile.Exists)
-                historyLogFile.Create();
+                historyLogFile.Create().Close();
         }
 
-        private void SetStartTime(object sender, EventArgs args)
+        private void HandleHistory(object sender, CopyFileEventArgs args)
         {
-            copyStart = DateTime.Now;
-        }
-
-        private void HandleHistory(object sender, FileEventArgs args)
-        {
-            HistoryLog log = LogFactory.Instance.GetNewHistoryLog((ISaveJob)sender, args.File, DateTime.Now - copyStart);
-            string jsonLog = SerializeLog(log);
+            IHistoryLog log = HistoryLogDirector.Instance.GetNewHistoryLog((ISaveJob)sender, args.File, args.Start);
+            string jsonLog = SerializeHistoryLog(log);
             AppendTextToHistoryLog(jsonLog);
         }
 
@@ -50,7 +43,7 @@ namespace testEasySave.Model.Services
             sw.WriteLine(text);
         }
 
-        private string SerializeLog(ILog log)
+        private string SerializeHistoryLog(IHistoryLog log)
         {
             return JsonSerializer.Serialize(log);
         }

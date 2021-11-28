@@ -32,14 +32,6 @@ namespace testEasySave.View
             Controller.Transmit(command);
         }
 
-        public void Display(string message, ConsoleColor color)
-        {
-            Console.ForegroundColor = color;
-            Console.WriteLine(message);
-            Console.ForegroundColor = ConsoleColor.White;
-            WaitForInstruction();
-        }
-
         public void DisplaySuccess(string message)
         {
             Display(message, ConsoleColor.Green);
@@ -48,6 +40,14 @@ namespace testEasySave.View
         public void DisplayError(string message)
         {
             Display(message, ConsoleColor.Red);
+        }
+
+        public void Display(string message, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.White;
+            WaitForInstruction();
         }
     }
 }

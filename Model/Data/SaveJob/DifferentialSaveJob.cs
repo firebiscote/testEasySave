@@ -33,9 +33,9 @@ namespace testEasySave.Model.Data.Job
                 if (!targetFile.Exists || targetFile.LastWriteTimeUtc < file.LastWriteTimeUtc)
                 {
                     targetFile.Delete();
-                    StartCopy.Invoke(this, EventArgs.Empty);
+                    DateTime start = DateTime.Now;
                     file.CopyTo(targetFile.FullName);
-                    FileCopied.Invoke(this, new FileEventArgs(file));
+                    FileCopied.Invoke(this, new CopyFileEventArgs(start, file));
                     files.Remove(fileName);
                 }
             }
@@ -46,7 +46,6 @@ namespace testEasySave.Model.Data.Job
             return Directory.GetFiles(SourceDirectory, "*", SearchOption.AllDirectories).ToList();
         }
 
-        public static event EventHandler StartCopy;
-        public static event EventHandler<FileEventArgs> FileCopied;
+        public static event EventHandler<CopyFileEventArgs> FileCopied;
     }
 }

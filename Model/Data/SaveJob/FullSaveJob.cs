@@ -29,9 +29,9 @@ namespace testEasySave.Model.Data.Job
             foreach (string fileName in files.ToArray())
             {
                 FileInfo file = new FileInfo(fileName);
-                StartCopy.Invoke(this, EventArgs.Empty);
+                DateTime start = DateTime.Now;
                 file.CopyTo(TargetDirectory + file.Name);
-                FileCopied.Invoke(this, new FileEventArgs(file));
+                FileCopied.Invoke(this, new CopyFileEventArgs(start, file));
                 files.Remove(fileName);
             }
         }
@@ -41,7 +41,6 @@ namespace testEasySave.Model.Data.Job
             return Directory.GetFiles(SourceDirectory, "*", SearchOption.AllDirectories).ToList();
         }
 
-        public static event EventHandler StartCopy;
-        public static event EventHandler<FileEventArgs> FileCopied;
+        public static event EventHandler<CopyFileEventArgs> FileCopied;
     }
 }

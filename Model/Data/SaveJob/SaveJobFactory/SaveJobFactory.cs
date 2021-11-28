@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Data.SaveJob.SaveJobFactory
 {
@@ -16,16 +15,6 @@ namespace testEasySave.Model.Data.SaveJob.SaveJobFactory
             {
                 Parameters.FullSaveJobType => new FullSaveJob(name, sourceDirectory, targetDirectory),
                 Parameters.DifferencialSaveJobType => new DifferentialSaveJob(name, sourceDirectory, targetDirectory),
-                _ => throw new KeyNotFoundException()
-            };
-        }
-
-        public ISaveJob GetNewSaveJob(string name, string sourceDirectory, string targetDirectory, SaveJobType type)
-        {
-            return type switch
-            {
-                SaveJobType.Full => new FullSaveJob(name, sourceDirectory, targetDirectory),
-                SaveJobType.Differential => new DifferentialSaveJob(name, sourceDirectory, targetDirectory),
                 _ => throw new KeyNotFoundException()
             };
         }
