@@ -29,11 +29,19 @@ namespace testEasySave.Model.Data.Job
             foreach (string fileName in files.ToArray())
             {
                 FileInfo file = new FileInfo(fileName);
+                CreateSubDirectory(file.FullName);
                 DateTime start = DateTime.Now;
-                file.CopyTo(TargetDirectory + file.Name);
+                file.CopyTo(TargetDirectory + file.FullName[SourceDirectory.Length..], true);
                 files.Remove(fileName);
                 FileCopied.Invoke(this, new CopyFileEventArgs(start, file, files.ToArray()));
             }
+        }
+
+        private void CreateSubDirectory(string fileName)
+        {
+            DirectoryInfo directory = new DirectoryInfo(TargetDirectory + fileName[(SourceDirectory.Length-1)..fileName.LastIndexOf("\\")]);
+            if (!directory.Exists)
+                directory.Create();
         }
 
         public List<string> GetFiles()

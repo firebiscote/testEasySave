@@ -9,16 +9,13 @@ using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Services
 {
-    public class HistoryLogService : IService
+    public class HistoryLogService : ILogService
     {
-        public static HistoryLogService Instance = new HistoryLogService();
         private FileInfo historyLogFile;
 
-        private HistoryLogService()
+        public HistoryLogService()
         {
             SetHistoryLogFile();
-            FullSaveJob.FileCopied += HandleHistory;
-            DifferentialSaveJob.FileCopied += HandleHistory;
         }
 
         private void SetHistoryLogFile()
@@ -29,7 +26,7 @@ namespace testEasySave.Model.Services
                 historyLogFile.Create().Close();
         }
 
-        private void HandleHistory(object sender, CopyFileEventArgs args)
+        public void Handle(object sender, CopyFileEventArgs args)
         {
             SetHistoryLogFile();
             string json = GetHistoryLogFileJson();
@@ -60,7 +57,7 @@ namespace testEasySave.Model.Services
             {
                 logs.AddRange(JsonConvert.DeserializeObject<List<HistoryLog>>(json));
             }
-            catch (JsonReaderException) { }
+            catch (Exception) { }
             return logs;
         }
 

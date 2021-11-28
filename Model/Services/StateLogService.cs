@@ -8,16 +8,13 @@ using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Services
 {
-    public class StateLogService : IService
+    public class StateLogService : ILogService
     {
-        public static StateLogService Instance = new StateLogService();
         private FileInfo stateLogFile;
 
-        private StateLogService()
+        public StateLogService()
         {
             SetStateLogFile();
-            FullSaveJob.FileCopied += HandleState;
-            DifferentialSaveJob.FileCopied += HandleState;
         }
 
         private void SetStateLogFile()
@@ -27,7 +24,7 @@ namespace testEasySave.Model.Services
                 stateLogFile.Create().Close();
         }
 
-        private void HandleState(object sender, CopyFileEventArgs args)
+        public void Handle(object sender, CopyFileEventArgs args)
         {
             List<IStateLog> stateLogs = new List<IStateLog>();
             foreach (ISaveJob saveJob in SaveJobService.Instance.SaveJobs.Values)

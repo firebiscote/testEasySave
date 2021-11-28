@@ -29,9 +29,10 @@ namespace testEasySave.Model.Data.Job
             foreach (string fileName in files.ToArray())
             {
                 FileInfo file = new FileInfo(fileName);
-                FileInfo targetFile = new FileInfo(TargetDirectory + file.Name);
+                FileInfo targetFile = new FileInfo(TargetDirectory + file.FullName[SourceDirectory.Length..]);
                 if (!targetFile.Exists || targetFile.LastWriteTimeUtc < file.LastWriteTimeUtc)
                 {
+                    CreateSubDirectory(targetFile.FullName);
                     targetFile.Delete();
                     DateTime start = DateTime.Now;
                     file.CopyTo(targetFile.FullName);
@@ -39,6 +40,13 @@ namespace testEasySave.Model.Data.Job
                     FileCopied.Invoke(this, new CopyFileEventArgs(start, file, files.ToArray()));
                 }
             }
+        }
+
+        private void CreateSubDirectory(string fileName)
+        {
+            DirectoryInfo directory = new DirectoryInfo(TargetDirectory + fileName[(SourceDirectory.Length - 1)..fileName.LastIndexOf("\\")]);
+            if (!directory.Exists)
+                directory.Create();
         }
 
         public List<string> GetFiles()

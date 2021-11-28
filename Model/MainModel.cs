@@ -15,8 +15,7 @@ namespace testEasySave.Model
         public MainModel()
         {
             _ = SaveJobService.Instance;
-            _ = HistoryLogService.Instance;
-            _ = StateLogService.Instance;
+            _ = GlobalLogService.Instance;
             InitActions();
         }
 
