@@ -3,7 +3,7 @@ using testEasySave.Exceptions;
 
 namespace testEasySave.Model.Services
 {
-    class TraductionService : IService
+    public class TraductionService : IService
     {
         public static TraductionService Instance = new TraductionService();
 

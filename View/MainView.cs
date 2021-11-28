@@ -3,7 +3,7 @@ using testEasySave.Controller;
 
 namespace testEasySave.View
 {
-    class MainView : IView
+    public class MainView : IView
     {
         public IController Controller { get; set; }
 

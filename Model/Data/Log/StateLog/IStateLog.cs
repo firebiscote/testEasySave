@@ -1,5 +1,4 @@
-﻿using System;
-using testEasySave.Model.Data.Log.StateLog.Progress;
+﻿using testEasySave.Model.Data.Log.StateLog.Progress;
 
 namespace testEasySave.Model.Data.Log.StateLog
 {
