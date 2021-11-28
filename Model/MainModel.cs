@@ -24,6 +24,7 @@ namespace testEasySave.Model
         {
             actions = new Dictionary<string, Action>
             {
+                { Parameters.Show, Show },
                 { Parameters.Create, Create },
                 { Parameters.Delete, Delete },
                 { Parameters.Execute, Execute },
@@ -40,6 +41,14 @@ namespace testEasySave.Model
                 throw new CommandNotExistException(action);
             args = arguments;
             actions[action].Invoke();
+        }
+
+        private void Show()
+        {
+            string saveJobsList = "";
+            foreach (ISaveJob saveJob in saveJobService.saveJobs.Values)
+                saveJobsList += Parameters.SaveJobStart + saveJob.Name + Parameters.SaveJobSeparator + saveJob.SourceDirectory + Parameters.DirectorySeparator + saveJob.TargetDirectory + Parameters.TypeSeparator + saveJob.Type + "\n";
+            throw new ShowException(saveJobsList);
         }
 
         private void Create()

@@ -12,17 +12,21 @@ namespace testEasySave.View
             SayHello();
         }
 
-        void IView.Start()
+        public void Start()
         {
+            ShowAllSaveJob();
             WaitForInstruction();
         }
 
         private void SayHello()
         {
-            Console.ForegroundColor = ConsoleColor.White;
             foreach (string line in Parameters.Hello)
                 Console.WriteLine(line);
-            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private void ShowAllSaveJob()
+        {
+            Controller.Transmit(Parameters.Show);
         }
 
         public void WaitForInstruction()

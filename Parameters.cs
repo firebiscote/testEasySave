@@ -10,6 +10,7 @@ namespace testEasySave
         public static string HistoryLogDirectory = BaseDirectory + @"Desktop\\test\\log\\historyLog\\";
 
         // command keyword
+        public static string Show = "show";
         public static string Create = "create";
         public static string Delete = "delete";
         public static string Execute = "execute";
@@ -45,6 +46,11 @@ namespace testEasySave
         public static string FileType = ".json";
         public static string FilePattern = "*" + FileType;
 
+        public static string SaveJobStart = " - ";
+        public static string SaveJobSeparator = " : ";
+        public static string DirectorySeparator = " | ";
+        public static string TypeSeparator = " -> ";
+
         // state or type
         public const string FullSaveJobType = "full";
         public const string DifferencialSaveJobType = "differential";
@@ -59,9 +65,10 @@ namespace testEasySave
                                                       @" | |___| (_| \__ \ |_| |  ____) | (_| |\ V /  __/  | || |_| | |_| |",
                                                       @" |______\__,_|___/\__, | |_____/ \__,_| \_/ \___|  |_(_)___(_)___/ ",
                                                       @"                   __/ |                                           ",
-                                                       "                  |___/                                            \n\n\n\n\n"};
+                                                       "                  |___/                                            \n"};
         public static string HelpMessage = "________________________________________________________________________\n" +
                                             TraductionService.Instance.GetHelpMessage() +
+                                           "\n=> " + Show + " {" + Name + " name}" + 
                                            "\n=> " + Create + " " + Name + " name " + SourceDirectory + " sourceDirectory " + TargetDirectory + " targetDirectory " + Type + " type" +
                                            "\n=> " + Delete + " {" + Name + " name}" +
                                            "\n=> " + Execute + " {" + Name + " name}" +

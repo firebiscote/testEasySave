@@ -6,9 +6,9 @@ namespace testEasySave
 {
     public class EasySave
     {
-        private IView view;
-        private IController controller;
-        private IModel model;
+        private readonly IView view;
+        private readonly IController controller;
+        private readonly IModel model;
 
         public EasySave()
         {

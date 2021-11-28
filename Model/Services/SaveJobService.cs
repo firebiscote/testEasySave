@@ -37,10 +37,7 @@ namespace testEasySave.Model.Services
 
         public void DeleteAll() {
             foreach (KeyValuePair<string, ISaveJob> saveJob in saveJobs)
-            {
-                File.Delete(Parameters.SaveJobDirectory + saveJob.Key + Parameters.FileType);
-                saveJobs.Remove(saveJob.Key);
-            }
+                Delete(saveJob.Key);
         }
 
         public void Delete(string name)

@@ -43,6 +43,10 @@ namespace testEasySave.Controller
             {
                 HandleHelpException(exception);
             }
+            catch (ShowException exception)
+            {
+                HandleShowException(exception);
+            }
             catch (Exception exception)
             {
                 HandleException(exception);
@@ -82,6 +86,11 @@ namespace testEasySave.Controller
         }
 
         private void HandleHelpException(HelpException e)
+        {
+            View.Display(e.Message, ConsoleColor.Gray);
+        }
+
+        private void HandleShowException(ShowException e)
         {
             View.Display(e.Message, ConsoleColor.Gray);
         }
