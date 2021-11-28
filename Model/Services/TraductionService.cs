@@ -5,29 +5,16 @@ namespace testEasySave.Model.Services
 {
     class TraductionService : IService
     {
-        private static TraductionService instance;
-        public static TraductionService Instance 
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new TraductionService();
-                return instance;
-            }
-        }
+        public static TraductionService Instance = new TraductionService();
 
         private readonly List<string> availableLanguages;
         private string language;
-        public string Language
+
+        public void SetLanguage(string language)
         {
-            get => language;
-            set
-            {
-                if (availableLanguages.Contains(value))
-                    language = value;
-                else
-                    throw new NotImplementedLanguageException();
-            } 
+            if (!availableLanguages.Contains(language))
+                throw new NotImplementedLanguageException(language);
+            this.language = language;
         }
 
         private TraductionService()
@@ -56,7 +43,7 @@ namespace testEasySave.Model.Services
             };
         }
 
-        public string GetErrorMessage()
+        public string GetExceptionMessage()
         {
             return language switch
             {
@@ -66,12 +53,42 @@ namespace testEasySave.Model.Services
             };
         }
 
-        public string GetParameterErrorMessage(string parameter)
+        public string GetCommandNotExistExceptionMessage(string command)
         {
             return language switch
             {
-                Parameters.English => "A parameter is missing : " + parameter,
-                Parameters.French => parameter + "Un paramètre est manquant : " + parameter,
+                Parameters.English => "Syntax error : '" + command + "' is not a command!",
+                Parameters.French => "Erreur de syntaxe : '" + command + "' n'est pas une commande !",
+                _ => throw new NotImplementedLanguageException()
+            };
+        }
+
+        public string GetNotEnoughSpaceExceptionMessage()
+        {
+            return language switch
+            {
+                Parameters.English => "There is too much save job! Please delete one before creation!",
+                Parameters.French => "Il y a trop de travaux de travail de sauvegarde ! Veuillez en supprimer un avant la création !",
+                _ => throw new NotImplementedLanguageException()
+            };
+        }
+
+        public string GetParameterExceptionMessage(string parameter)
+        {
+            return language switch
+            {
+                Parameters.English => "Syntax error : '" + parameter + "' parameter is missing!",
+                Parameters.French => "Erreur de syntaxe : Le paramètre '" + parameter + "' est manquant !",
+                _ => throw new NotImplementedLanguageException()
+            };
+        }
+
+        public string GetNotImplementedLanguageExceptionMessage(string language)
+        {
+            return language switch
+            {
+                Parameters.English => "The language '" + language + "' is not available!",
+                Parameters.French => "Le langage '" + language + "' n'est pas disponible !",
                 _ => throw new NotImplementedLanguageException()
             };
         }

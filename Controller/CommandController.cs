@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using testEasySave.Exceptions;
 using testEasySave.Model;
 using testEasySave.Model.Services;
 using testEasySave.View;
@@ -9,7 +10,6 @@ namespace testEasySave.Controller
 {
     public class CommandController : IController
     {
-        private string command;
         private string action;
         private Dictionary<string, string> arguments;
         public IView View { get; set; }
@@ -17,23 +17,41 @@ namespace testEasySave.Controller
 
         public void Transmit(string command)
         {
-            this.command = command;
-            Parse();
+            ParseCommand(command);
             bool isException = false;
             try
             {
                 Model.Process(action, arguments);
             }
-            catch (Exception e) 
+            catch (CommandNotExistException exception)
             {
-                isException = true;
-                HandleError(e.Message);
+                HandleCommandNotExistException(exception);
+            }
+            catch (NotEnoughSpaceException)
+            {
+                HandleNotEnoughSpaceException();
+            }
+            catch (KeyNotFoundException exception)
+            {
+                HandleKeyNotFoundException(exception);
+            }
+            catch (NotImplementedLanguageException exception)
+            {
+                HandleNotImplementedLanguageException(exception);
+            }
+            catch (HelpException exception)
+            {
+                HandleHelpException(exception);
+            }
+            catch (Exception exception)
+            {
+                HandleException(exception);
             }
             if (!isException)
                 View.DisplaySuccess(TraductionService.Instance.GetSuccessMessage());
         }
 
-        private void Parse()
+        private void ParseCommand(string command)
         {
             List<string> commandSplited = command.Split(Parameters.CommandSeparator).ToList();
             action = commandSplited[0];
@@ -42,17 +60,38 @@ namespace testEasySave.Controller
                 arguments.Add(commandSplited[i], commandSplited[i + 1]);
         }
 
-        private void HandleError(string message)
+        private void HandleCommandNotExistException(CommandNotExistException e)
         {
-            if (message == null)
-                View.DisplayError(TraductionService.Instance.GetErrorMessage());
+            View.DisplayError(TraductionService.Instance.GetCommandNotExistExceptionMessage(e.Message));
+        }
+
+        private void HandleNotEnoughSpaceException()
+        {
+            View.DisplayError(TraductionService.Instance.GetNotEnoughSpaceExceptionMessage());
+        }
+
+        private void HandleKeyNotFoundException(KeyNotFoundException e)
+        {
+            string errorMessage = e.Message[(e.Message.IndexOf(Parameters.ErrorArgumentDelimiter) + 1)..e.Message.LastIndexOf(Parameters.ErrorArgumentDelimiter)];
+            View.DisplayError(TraductionService.Instance.GetParameterExceptionMessage(errorMessage));
+        }
+
+        private void HandleNotImplementedLanguageException(NotImplementedLanguageException e)
+        {
+            View.DisplayError(TraductionService.Instance.GetNotImplementedLanguageExceptionMessage(e.Message));
+        }
+
+        private void HandleHelpException(HelpException e)
+        {
+            View.Display(e.Message, ConsoleColor.Gray);
+        }
+
+        private void HandleException(Exception e)
+        {
+            if (e.Message == null)
+                View.DisplayError(TraductionService.Instance.GetExceptionMessage());
             else
-            {
-                if (message.Contains(Parameters.ArgumentError))
-                    View.DisplayError(TraductionService.Instance.GetParameterErrorMessage(message[(message.IndexOf(Parameters.ErrorArgumentDelimiter)+1)..message.LastIndexOf(Parameters.ErrorArgumentDelimiter)]));
-                else
-                    View.DisplayError(message);
-            }
+                View.DisplayError(e.Message);
         }
     }
 }
