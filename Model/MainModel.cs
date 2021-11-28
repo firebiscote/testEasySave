@@ -9,14 +9,14 @@ namespace testEasySave.Model
 {
     public class MainModel : IModel
     {
-        private readonly SaveJobService saveJobService;
         private Dictionary<string, string> args;
         private Dictionary<string, Action> actions;
 
         public MainModel()
         {
-            saveJobService = new SaveJobService();
+            _ = SaveJobService.Instance;
             _ = HistoryLogService.Instance;
+            _ = StateLogService.Instance;
             InitActions();
         }
 
@@ -46,7 +46,7 @@ namespace testEasySave.Model
         private void Show()
         {
             string saveJobsList = "\n";
-            foreach (ISaveJob saveJob in saveJobService.saveJobs.Values)
+            foreach (ISaveJob saveJob in SaveJobService.Instance.SaveJobs.Values)
                 saveJobsList += Parameters.SaveJobStart + saveJob.Name + Parameters.SaveJobSeparator + saveJob.SourceDirectory + Parameters.DirectorySeparator + saveJob.TargetDirectory + Parameters.TypeSeparator + saveJob.Type + "\n";
             throw new ShowException(saveJobsList);
         }
@@ -54,23 +54,23 @@ namespace testEasySave.Model
         private void Create()
         {
             ISaveJob newSaveJob = SaveJobFactory.Instance.GetNewSaveJob(args[Parameters.Name], args[Parameters.SourceDirectory], args[Parameters.TargetDirectory], args[Parameters.Type]);
-            saveJobService.Create(newSaveJob);
+            SaveJobService.Instance.Create(newSaveJob);
         }
 
         private void Delete()
         {
             if (args.Count == 0)
-                saveJobService.DeleteAll();
+                SaveJobService.Instance.DeleteAll();
             else
-                saveJobService.Delete(args[Parameters.Name]);
+                SaveJobService.Instance.Delete(args[Parameters.Name]);
         }
 
         private void Execute()
         {
             if (args.Count == 0)
-                saveJobService.ExecuteAll();
+                SaveJobService.Instance.ExecuteAll();
             else
-                saveJobService.Execute(args[Parameters.Name]);
+                SaveJobService.Instance.Execute(args[Parameters.Name]);
         }
 
         private void SetLang()

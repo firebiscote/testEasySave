@@ -8,8 +8,8 @@ namespace testEasySave.Model.Data.Log.StateLog
         public string SaveJobName { get; set; }
         public string Timestamp { get; set; }
         public string State { get; set; }
-        public long TotalFilesTargeted { get; set; }
-        public double TotalFilesTargetedSize { get; set; }
+        public int TotalTargetedFiles { get; set; }
+        public long TotalTargetedFilesSize { get; set; }
         public SaveJobProgress Progress { get; set; }
     }
 }

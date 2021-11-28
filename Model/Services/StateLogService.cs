@@ -1,7 +1,9 @@
-﻿using System.IO;
-using System.Text.Json;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 using testEasySave.Model.Data.Job;
 using testEasySave.Model.Data.Log.StateLog;
+using testEasySave.Model.Data.Log.StateLog.StateBuilder;
 using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Services
@@ -20,32 +22,35 @@ namespace testEasySave.Model.Services
 
         private void SetStateLogFile()
         {
-            stateLogFile = new FileInfo(Parameters.StateLogFile);
+            stateLogFile = new FileInfo(Parameters.StateLogFile + Parameters.FileType);
             if (!stateLogFile.Exists)
                 stateLogFile.Create().Close();
         }
 
         private void HandleState(object sender, CopyFileEventArgs args)
         {
-            string jsonLog = "";
-            foreach (ISaveJob saveJob in lol)
+            List<IStateLog> stateLogs = new List<IStateLog>();
+            foreach (ISaveJob saveJob in SaveJobService.Instance.SaveJobs.Values)
             {
-                IStateLog log = StateLogDirector.Instance.GetNewHistoryLog((ISaveJob)sender, args.File, args.Start);
-                jsonLog += SerializeStateLog(log) + "\n";
+                if (((ISaveJob)sender).Name == saveJob.Name)
+                    stateLogs.Add(StateLogDirector.Instance.GetNewActiveStateLog(saveJob, args.File, args.RemainingFiles));
+                else
+                    stateLogs.Add(StateLogDirector.Instance.GetNewEndStateLog(saveJob));
             }
-            WriteTextToStateLog(jsonLog);
+            string json = SerializeStateLogs(stateLogs);
+            WriteTextToStateLogFile(json);
         }
 
-        private void WriteTextToStateLog(string text)
+        private void WriteTextToStateLogFile(string json)
         {
             stateLogFile.Delete();
             using StreamWriter sw = stateLogFile.CreateText();
-            sw.WriteLine(text);
+            sw.Write(json);
         }
 
-        private string SerializeStateLog(IStateLog log)
+        private string SerializeStateLogs(List<IStateLog> logs)
         {
-            return JsonSerializer.Serialize(log);
+            return JsonConvert.SerializeObject(logs, Formatting.Indented);
         }
     }
 }

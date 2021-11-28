@@ -11,14 +11,14 @@ namespace testEasySave.Model.Data.Log.HistoryLog.HistoryBuilder
             Log = new HistoryLog();
         }
 
-        public void BuildSaveJobName(string name)
+        public void BuildSaveJobName(string name) 
         {
             Log.SaveJobName = name;
         }
 
         public void BuildTimestamp()
         {
-            Log.Timestamp = DateTime.Now.ToString(Parameters.HistoryLogTimestampFormat);
+            Log.Timestamp = DateTime.Now.ToString(Parameters.LogTimestampFormat);
         }
 
         public void BuildSourceFileName(string sourceFileName)

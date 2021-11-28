@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using testEasySave.Model.Data.Job;
 using testEasySave.Model.Data.Log.HistoryLog;
 using testEasySave.Model.Data.Log.HistoryLog.HistoryBuilder;
@@ -30,22 +31,42 @@ namespace testEasySave.Model.Services
 
         private void HandleHistory(object sender, CopyFileEventArgs args)
         {
-            IHistoryLog log = HistoryLogDirector.Instance.GetNewHistoryLog((ISaveJob)sender, args.File, args.Start);
-            string jsonLog = SerializeHistoryLog(log);
-            AppendTextToHistoryLog(jsonLog);
+            SetHistoryLogFile();
+            string json = GetHistoryLogFileJson();
+            List<IHistoryLog> historyLogs = DeserializeHistoryLogs(json);
+            historyLogs.Add(HistoryLogDirector.Instance.GetNewHistoryLog((ISaveJob)sender, args.File, args.Start));
+            json = SerializeHistoryLogs(historyLogs);
+            WriteTextToHistoryLogFile(json);
         }
 
-        private void AppendTextToHistoryLog(string text)
+        private string GetHistoryLogFileJson()
         {
-            if (historyLogFile.Name != DateTime.Today.ToString())
-                SetHistoryLogFile();
-            using StreamWriter sw = historyLogFile.AppendText();
-            sw.WriteLine(text);
+            string fileName = Directory.GetFiles(Parameters.HistoryLogDirectory, Parameters.FilePattern)[^1];
+            return File.ReadAllText(fileName);
         }
 
-        private string SerializeHistoryLog(IHistoryLog log)
+        private void WriteTextToHistoryLogFile(string json)
         {
-            return JsonSerializer.Serialize(log);
+            SetHistoryLogFile();
+            historyLogFile.Delete();
+            using StreamWriter sw = historyLogFile.CreateText();
+            sw.Write(json);
+        }
+
+        private List<IHistoryLog> DeserializeHistoryLogs(string json)
+        {
+            List<IHistoryLog> logs = new List<IHistoryLog>();
+            try
+            {
+                logs.AddRange(JsonConvert.DeserializeObject<List<HistoryLog>>(json));
+            }
+            catch (JsonReaderException) { }
+            return logs;
+        }
+
+        private string SerializeHistoryLogs(List<IHistoryLog> logs)
+        {
+            return JsonConvert.SerializeObject(logs, Formatting.Indented);
         }
     }
 }

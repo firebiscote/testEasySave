@@ -13,18 +13,24 @@ namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
             Builder = new StateLogBuilder();
         }
 
-        public IStateLog GetNewStateLog(ISaveJob saveJob, FileInfo file)
+        public IStateLog GetNewActiveStateLog(ISaveJob saveJob, FileInfo file, string[] remainingFiles)
         {
             Builder.Reset();
             Builder.BuildTimestamp();
             Builder.BuildSaveJobName(saveJob.Name);
-            Builder.BuildState(true);
-            if (true)
-            {
-                Builder.BuildTotalFilesTargeted();
-                Builder.BuildTotalFilesTargetedSize();
-                Builder.BuildProgress();
-            }
+            Builder.BuildState(Parameters.LogActiveState);
+            Builder.BuildTotalTargetedFiles(saveJob.SourceDirectory);
+            Builder.BuildTotalTargetedFilesSize();
+            Builder.BuildProgress(remainingFiles, file.FullName, saveJob.TargetDirectory + file.Name);
+            return Builder.Log;
+        }
+
+        public IStateLog GetNewEndStateLog(ISaveJob saveJob)
+        {
+            Builder.Reset();
+            Builder.BuildTimestamp();
+            Builder.BuildSaveJobName(saveJob.Name);
+            Builder.BuildState(Parameters.LogEndState);
             return Builder.Log;
         }
     }

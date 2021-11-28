@@ -39,7 +39,7 @@ namespace testEasySave
         public static string HistoryLogDateSeparator = "/";
         public static string HistoryLogNameSeparator = "-";
         public static string HistoryLogDateFormat = "dd" + HistoryLogDateSeparator + "MM"+ HistoryLogDateSeparator + "yyyy";
-        public static string HistoryLogTimestampFormat = "T";
+        public static string LogTimestampFormat = "T";
 
         public static string CommandSeparator = " ";
         public static string ArgumentError = "key";
@@ -53,6 +53,10 @@ namespace testEasySave
         public static string SaveJobSeparator = " : ";
         public static string DirectorySeparator = " | ";
         public static string TypeSeparator = " -> ";
+
+        public static string JsonStart = "[";
+        public static string JsonSeparator = ",\n";
+        public static string JsonEnd = "]";
 
         // state or type
         public const string FullSaveJobType = "full";

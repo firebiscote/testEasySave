@@ -7,11 +7,13 @@ namespace testEasySave.Model.Data.ToolBox
     {
         public DateTime Start { get; }
         public FileInfo File { get; }
+        public string[] RemainingFiles { get; }
 
-        public CopyFileEventArgs(DateTime start, FileInfo file)
+        public CopyFileEventArgs(DateTime start, FileInfo file, string[] remainingFiles)
         {
             Start = start;
             File = file;
+            RemainingFiles = remainingFiles;
         }
     }
 }

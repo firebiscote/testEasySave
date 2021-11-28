@@ -31,8 +31,8 @@ namespace testEasySave.Model.Data.Job
                 FileInfo file = new FileInfo(fileName);
                 DateTime start = DateTime.Now;
                 file.CopyTo(TargetDirectory + file.Name);
-                FileCopied.Invoke(this, new CopyFileEventArgs(start, file));
                 files.Remove(fileName);
+                FileCopied.Invoke(this, new CopyFileEventArgs(start, file, files.ToArray()));
             }
         }
 
