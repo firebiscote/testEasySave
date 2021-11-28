@@ -18,7 +18,6 @@ namespace testEasySave
         public static string Delete = "delete";
         public static string Execute = "execute";
         public static string Language = "language";
-        public static string SetLogDirectory = "setLogDirectory";
         public static string Help = "help";
         public static string Quit = "quit";
 

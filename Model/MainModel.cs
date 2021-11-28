@@ -28,7 +28,6 @@ namespace testEasySave.Model
                 { Parameters.Delete, Delete },
                 { Parameters.Execute, Execute },
                 { Parameters.Language, SetLang },
-                { Parameters.SetLogDirectory, SetLogPath },
                 { Parameters.Help, Help },
                 { Parameters.Quit, Quit },
             };
@@ -75,11 +74,6 @@ namespace testEasySave.Model
         private void SetLang()
         {
             TraductionService.Instance.SetLanguage(args[Parameters.Lang]);
-        }
-
-        private void SetLogPath()
-        {
-            throw new NotImplementedException();
         }
 
         private void Help()
