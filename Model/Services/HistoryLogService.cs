@@ -20,10 +20,16 @@ namespace testEasySave.Model.Services
 
         private void SetHistoryLogFile()
         {
+            SetHistoryLogDirectory();
             string historyLogName = Parameters.HistoryLogNameStart + DateTime.Today.ToString(Parameters.HistoryLogDateFormat).Replace(Parameters.HistoryLogDateSeparator, Parameters.HistoryLogNameSeparator);
             historyLogFile = new FileInfo(Parameters.HistoryLogDirectory + historyLogName + Parameters.FileType);
             if (!historyLogFile.Exists)
                 historyLogFile.Create().Close();
+        }
+
+        private void SetHistoryLogDirectory()
+        {
+            new DirectoryInfo(Parameters.HistoryLogDirectory).Create();
         }
 
         public void Handle(object sender, CopyFileEventArgs args)

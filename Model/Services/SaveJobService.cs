@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using testEasySave.Model.Data.Job;
 using testEasySave.Model.Data.ToolBox;
 using testEasySave.Exceptions;
+using System;
 
 namespace testEasySave.Model.Services
 {
@@ -14,8 +15,14 @@ namespace testEasySave.Model.Services
 
         private SaveJobService()
         {
+            SetSaveJobDirectory();
             SaveJobs = new FixedSizeDictionary<string, ISaveJob>(Parameters.MaxSaveJob);
             InitSaveJobs();
+        }
+
+        private void SetSaveJobDirectory()
+        {
+            new DirectoryInfo(Parameters.SaveJobDirectory).Create();
         }
 
         private void InitSaveJobs()

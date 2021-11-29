@@ -19,9 +19,15 @@ namespace testEasySave.Model.Services
 
         private void SetStateLogFile()
         {
-            stateLogFile = new FileInfo(Parameters.StateLogFile + Parameters.FileType);
+            SetStateLogDirectory();
+            stateLogFile = new FileInfo(Parameters.StateLogFile);
             if (!stateLogFile.Exists)
                 stateLogFile.Create().Close();
+        }
+
+        private void SetStateLogDirectory()
+        {
+            new DirectoryInfo(Parameters.StateLogDirectory).Create();
         }
 
         public void Handle(object sender, CopyFileEventArgs args)

@@ -5,9 +5,9 @@ namespace testEasySave
     public static class Parameters
     {
         // directory
-        public static string BaseDirectory = @"C:\\Users\\maxim\\";
-        public static string SaveJobDirectory = BaseDirectory + @"Desktop\\test\\saveJob\\";
-        public static string LogFileDirectory = BaseDirectory + @"Desktop\\test\\log\\";
+        public static string BaseDirectory = @"..\\..\\";
+        public static string SaveJobDirectory = BaseDirectory + @"saveJob\\";
+        public static string LogFileDirectory = BaseDirectory + @"log\\";
         public static string HistoryLogDirectory = LogFileDirectory + @"historyLog\\";
         public static string StateLogDirectory = LogFileDirectory + @"stateLog\\";
         public static string StateLogFile = StateLogDirectory + "state" + FileType;
