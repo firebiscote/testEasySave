@@ -13,15 +13,7 @@ namespace testEasySave.Model.Data.Job
         public string TargetDirectory { get; set; }
         public string Type { get; set; }
 
-        private DifferentialSaveJob() { }
-
-        public DifferentialSaveJob(string name, string sourceDirectory, string targetDirectory)
-        {
-            Name = name;
-            SourceDirectory = sourceDirectory;
-            TargetDirectory = targetDirectory;
-            Type = Parameters.DifferencialSaveJobType;
-        }
+        public DifferentialSaveJob() { }
 
         public void Execute()
         {

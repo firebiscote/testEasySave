@@ -59,7 +59,7 @@ namespace testEasySave
 
         // state or type
         public const string FullSaveJobType = "full";
-        public const string DifferencialSaveJobType = "differential";
+        public const string differentialSaveJobType = "differential";
         public static string LogEndState = "END";
         public static string LogActiveState = "ACTIVE";
 

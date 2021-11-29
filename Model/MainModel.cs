@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using testEasySave.Exceptions;
 using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.SaveJob.SaveJobFactory;
+using testEasySave.Model.Data.SaveJob.SaveJobBuilder;
 using testEasySave.Model.Services;
 
 namespace testEasySave.Model
@@ -51,7 +51,7 @@ namespace testEasySave.Model
 
         private void Create()
         {
-            ISaveJob newSaveJob = SaveJobFactory.Instance.GetNewSaveJob(args[Parameters.Name], args[Parameters.SourceDirectory], args[Parameters.TargetDirectory], args[Parameters.Type]);
+            ISaveJob newSaveJob = SaveJobDirector.Instance.GetNewSaveJob(args[Parameters.Name], args[Parameters.SourceDirectory], args[Parameters.TargetDirectory], args[Parameters.Type]);
             SaveJobService.Instance.Create(newSaveJob);
         }
 

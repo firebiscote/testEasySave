@@ -62,7 +62,7 @@ namespace testEasySave.Model.Services
         {
             if (json.Contains(Parameters.FullSaveJobType))
                 return JsonConvert.DeserializeObject<FullSaveJob>(json);
-            else if (json.Contains(Parameters.DifferencialSaveJobType))
+            else if (json.Contains(Parameters.differentialSaveJobType))
                 return JsonConvert.DeserializeObject<DifferentialSaveJob>(json);
             else
                 throw new Exception();
