@@ -8,17 +8,14 @@ namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
         public static StateLogDirector Instance = new StateLogDirector();
         public IStateLogBuilder Builder { get; set; }
 
-        private StateLogDirector()
-        {
-            Builder = new StateLogBuilder();
-        }
+        private StateLogDirector() { }
 
         public IStateLog GetNewActiveStateLog(ISaveJob saveJob, FileInfo file, string[] remainingFiles)
         {
-            Builder.Reset();
+            Builder = new ActiveStateLogBuilder();
             Builder.BuildTimestamp();
             Builder.BuildSaveJobName(saveJob.Name);
-            Builder.BuildState(Parameters.LogActiveState);
+            Builder.BuildState();
             Builder.BuildTotalTargetedFiles(saveJob.SourceDirectory);
             Builder.BuildTotalTargetedFilesSize();
             Builder.BuildProgress(remainingFiles, file.FullName, saveJob.TargetDirectory + file.Name);
@@ -27,10 +24,10 @@ namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
 
         public IStateLog GetNewEndStateLog(ISaveJob saveJob)
         {
-            Builder.Reset();
+            Builder = new EndStateLogBuilder();
             Builder.BuildTimestamp();
             Builder.BuildSaveJobName(saveJob.Name);
-            Builder.BuildState(Parameters.LogEndState);
+            Builder.BuildState();
             return Builder.Log;
         }
     }
