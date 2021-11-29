@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Text.Json;
 using System.Collections.Generic;
 using testEasySave.Model.Data.Job;
 using testEasySave.Model.Data.ToolBox;
-using Newtonsoft.Json;
+using testEasySave.Exceptions;
 
 namespace testEasySave.Model.Services
 {
@@ -61,16 +61,16 @@ namespace testEasySave.Model.Services
         private ISaveJob DeSerializeSaveJob(string json)
         {
             if (json.Contains(Parameters.FullSaveJobType))
-                return JsonConvert.DeserializeObject<FullSaveJob>(json);
+                return JsonSerializer.Deserialize<FullSaveJob>(json);
             else if (json.Contains(Parameters.differentialSaveJobType))
-                return JsonConvert.DeserializeObject<DifferentialSaveJob>(json);
+                return JsonSerializer.Deserialize<DifferentialSaveJob>(json);
             else
-                throw new Exception();
+                throw new SaveJobTypeNotImplementedException();
         }
 
         private string SerializeSaveJob(ISaveJob saveJob)
         {
-            return JsonConvert.SerializeObject(saveJob, Formatting.Indented);
+            return JsonSerializer.Serialize(saveJob, new JsonSerializerOptions { WriteIndented = true });
         }
     }
 }

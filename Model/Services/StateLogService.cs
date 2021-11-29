@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using testEasySave.Model.Data.Job;
 using testEasySave.Model.Data.Log.StateLog;
 using testEasySave.Model.Data.Log.StateLog.StateBuilder;
@@ -47,7 +47,7 @@ namespace testEasySave.Model.Services
 
         private string SerializeStateLogs(List<IStateLog> logs)
         {
-            return JsonConvert.SerializeObject(logs, Formatting.Indented);
+            return JsonSerializer.Serialize(logs, new JsonSerializerOptions { WriteIndented = true });
         }
     }
 }

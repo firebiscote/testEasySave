@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using testEasySave.Model.Data.Job;
 using testEasySave.Model.Data.Log.HistoryLog;
 using testEasySave.Model.Data.Log.HistoryLog.HistoryBuilder;
@@ -55,7 +55,7 @@ namespace testEasySave.Model.Services
             List<IHistoryLog> logs = new List<IHistoryLog>();
             try
             {
-                logs.AddRange(JsonConvert.DeserializeObject<List<HistoryLog>>(json));
+                logs.AddRange(JsonSerializer.Deserialize<List<HistoryLog>>(json));
             }
             catch (Exception) { }
             return logs;
@@ -63,7 +63,7 @@ namespace testEasySave.Model.Services
 
         private string SerializeHistoryLogs(List<IHistoryLog> logs)
         {
-            return JsonConvert.SerializeObject(logs, Formatting.Indented);
+            return JsonSerializer.Serialize(logs, new JsonSerializerOptions { WriteIndented = true });
         }
     }
 }

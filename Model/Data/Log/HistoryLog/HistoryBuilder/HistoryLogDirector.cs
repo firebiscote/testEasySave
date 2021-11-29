@@ -21,7 +21,7 @@ namespace testEasySave.Model.Data.Log.HistoryLog.HistoryBuilder
             Builder.BuildTimestamp();
             Builder.BuildSaveJobName(saveJob.Name);
             Builder.BuildSourceFileName(file.FullName);
-            Builder.BuildTargetFileName(saveJob.TargetDirectory + file.Name);
+            Builder.BuildTargetFileName(saveJob.TargetDirectory + file.FullName[saveJob.SourceDirectory.Length..]);
             Builder.BuildFileSize(file.Length);
             return Builder.Log;
         }

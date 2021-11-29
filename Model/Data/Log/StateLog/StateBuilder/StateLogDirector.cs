@@ -18,7 +18,7 @@ namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
             Builder.BuildState();
             Builder.BuildTotalTargetedFiles(saveJob.SourceDirectory);
             Builder.BuildTotalTargetedFilesSize();
-            Builder.BuildProgress(remainingFiles, file.FullName, saveJob.TargetDirectory + file.Name);
+            Builder.BuildProgress(remainingFiles, file.FullName, saveJob.TargetDirectory + file.FullName[saveJob.SourceDirectory.Length..]);
             return Builder.Log;
         }
 

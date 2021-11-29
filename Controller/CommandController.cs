@@ -27,7 +27,7 @@ namespace testEasySave.Controller
             {
                 HandleCommandNotExistException(exception);
             }
-            /*catch (NotEnoughSpaceException)
+            catch (NotEnoughSpaceException)
             {
                 HandleNotEnoughSpaceException();
             }
@@ -42,7 +42,7 @@ namespace testEasySave.Controller
             catch (NotImplementedLanguageException exception)
             {
                 HandleNotImplementedLanguageException(exception);
-            }*/
+            }
             catch (HelpException exception)
             {
                 HandleHelpException(exception);
@@ -51,10 +51,10 @@ namespace testEasySave.Controller
             {
                 HandleShowException(exception);
             }
-            /*catch (Exception exception)
+            catch (Exception exception)
             {
                 HandleException(exception);
-            }*/
+            }
             if (!isException)
                 View.DisplaySuccess(TraductionService.Instance.GetSuccessMessage());
         }
