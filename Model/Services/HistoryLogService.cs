@@ -37,7 +37,7 @@ namespace testEasySave.Model.Services
             SetHistoryLogFile();
             string json = GetHistoryLogFileJson();
             List<IHistoryLog> historyLogs = DeserializeHistoryLogs(json);
-            historyLogs.Add(HistoryLogDirector.Instance.GetNewHistoryLog((ISaveJob)sender, args.File, args.Start));
+            historyLogs.Add(HistoryLogDirector.Instance.GetNewHistoryLog((IBackupJob)sender, args.File, args.Start));
             json = SerializeHistoryLogs(historyLogs);
             WriteTextToHistoryLogFile(json);
         }

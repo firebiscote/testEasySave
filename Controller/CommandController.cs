@@ -62,8 +62,8 @@ namespace testEasySave.Controller
             List<string> commandSplited = command.Split(Parameters.CommandSeparator).ToList();
             action = commandSplited[0];
             arguments = new Dictionary<string, string>();
-            for (int i = 1; i < commandSplited.Count() - 1; i += 2)
-                arguments.Add(commandSplited[i], commandSplited[i + 1]);
+            for (int i = 1; i < commandSplited.Count(); i += 2)
+                arguments.Add(commandSplited[i], (i + 1 == commandSplited.Count()) ? null : commandSplited[i + 1]);
         }
 
         private void HandleCommandNotExistException(CommandNotExistException e)

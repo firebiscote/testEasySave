@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using testEasySave.Exceptions;
 using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.SaveJob.SaveJobBuilder;
+using testEasySave.Model.Data.BackupJob.BackupJobBuilder;
 using testEasySave.Model.Services;
 
 namespace testEasySave.Model
@@ -14,7 +14,7 @@ namespace testEasySave.Model
 
         public MainModel()
         {
-            _ = SaveJobService.Instance;
+            _ = BackupJobService.Instance;
             _ = GlobalLogService.Instance;
             InitActions();
         }
@@ -44,31 +44,31 @@ namespace testEasySave.Model
         private void Show()
         {
             string saveJobsList = "\n";
-            foreach (ISaveJob saveJob in SaveJobService.Instance.SaveJobs.Values)
+            foreach (IBackupJob saveJob in BackupJobService.Instance.SaveJobs.Values)
                 saveJobsList += Parameters.SaveJobStart + saveJob.Name + Parameters.SaveJobSeparator + saveJob.SourceDirectory + Parameters.DirectorySeparator + saveJob.TargetDirectory + Parameters.TypeSeparator + saveJob.Type + "\n";
             throw new ShowException(saveJobsList);
         }
 
         private void Create()
         {
-            ISaveJob newSaveJob = SaveJobDirector.Instance.GetNewSaveJob(args[Parameters.Name], args[Parameters.SourceDirectory], args[Parameters.TargetDirectory], args[Parameters.Type]);
-            SaveJobService.Instance.Create(newSaveJob);
+            IBackupJob newSaveJob = BackupJobDirector.Instance.GetNewSaveJob(args[Parameters.Name], args[Parameters.SourceDirectory], args[Parameters.TargetDirectory], args[Parameters.Type]);
+            BackupJobService.Instance.Create(newSaveJob);
         }
 
         private void Delete()
         {
             if (args.Count == 0)
-                SaveJobService.Instance.DeleteAll();
+                BackupJobService.Instance.DeleteAll();
             else
-                SaveJobService.Instance.Delete(args[Parameters.Name]);
+                BackupJobService.Instance.Delete(args[Parameters.Name]);
         }
 
         private void Execute()
         {
             if (args.Count == 0)
-                SaveJobService.Instance.ExecuteAll();
+                BackupJobService.Instance.ExecuteAll();
             else
-                SaveJobService.Instance.Execute(args[Parameters.Name]);
+                BackupJobService.Instance.Execute(args[Parameters.Name]);
         }
 
         private void SetLang()

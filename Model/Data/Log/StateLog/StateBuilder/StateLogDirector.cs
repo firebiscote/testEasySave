@@ -10,7 +10,7 @@ namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
 
         private StateLogDirector() { }
 
-        public IStateLog GetNewActiveStateLog(ISaveJob saveJob, FileInfo file, string[] remainingFiles)
+        public IStateLog GetNewActiveStateLog(IBackupJob saveJob, FileInfo file, string[] remainingFiles)
         {
             Builder = new ActiveStateLogBuilder();
             Builder.BuildTimestamp();
@@ -22,7 +22,7 @@ namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
             return Builder.Log;
         }
 
-        public IStateLog GetNewEndStateLog(ISaveJob saveJob)
+        public IStateLog GetNewEndStateLog(IBackupJob saveJob)
         {
             Builder = new EndStateLogBuilder();
             Builder.BuildTimestamp();

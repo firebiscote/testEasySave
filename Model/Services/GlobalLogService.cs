@@ -12,8 +12,8 @@ namespace testEasySave.Model.Services
         private GlobalLogService()
         {
             logServices = new List<ILogService>() { new HistoryLogService(), new StateLogService() };
-            FullSaveJob.FileCopied += Handle;
-            DifferentialSaveJob.FileCopied += Handle;
+            FullBackupJob.FileCopied += Handle;
+            DifferentialBackupJob.FileCopied += Handle;
         }
 
         public void Handle(object sender, CopyFileEventArgs args)

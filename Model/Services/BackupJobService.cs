@@ -7,15 +7,15 @@ using testEasySave.Exceptions;
 
 namespace testEasySave.Model.Services
 {
-    public class SaveJobService : IService
+    public class BackupJobService : IService
     {
-        public static SaveJobService Instance = new SaveJobService();
-        public FixedSizeDictionary<string, ISaveJob> SaveJobs { get; }
+        public static BackupJobService Instance = new BackupJobService();
+        public FixedSizeDictionary<string, IBackupJob> SaveJobs { get; }
 
-        private SaveJobService()
+        private BackupJobService()
         {
             SetSaveJobDirectory();
-            SaveJobs = new FixedSizeDictionary<string, ISaveJob>(Parameters.MaxSaveJob);
+            SaveJobs = new FixedSizeDictionary<string, IBackupJob>(Parameters.MaxSaveJob);
             InitSaveJobs();
         }
 
@@ -29,12 +29,12 @@ namespace testEasySave.Model.Services
             foreach (string fileName in Directory.GetFiles(Parameters.SaveJobDirectory, Parameters.FilePattern))
             {
                 string json = File.ReadAllText(fileName);
-                ISaveJob saveJob = DeSerializeSaveJob(json);
+                IBackupJob saveJob = DeSerializeSaveJob(json);
                 SaveJobs.Add(saveJob.Name, saveJob);
             }
         }
 
-        public void Create(ISaveJob saveJob)
+        public void Create(IBackupJob saveJob)
         {
             SaveJobs.Add(saveJob.Name, saveJob);
             string fileName = Parameters.SaveJobDirectory + saveJob.Name + Parameters.FileType;
@@ -43,7 +43,7 @@ namespace testEasySave.Model.Services
         }
 
         public void DeleteAll() {
-            foreach (KeyValuePair<string, ISaveJob> saveJob in SaveJobs)
+            foreach (KeyValuePair<string, IBackupJob> saveJob in SaveJobs)
                 Delete(saveJob.Key);
         }
 
@@ -55,7 +55,7 @@ namespace testEasySave.Model.Services
 
         public void ExecuteAll()
         {
-            foreach (KeyValuePair<string, ISaveJob> saveJob in SaveJobs)
+            foreach (KeyValuePair<string, IBackupJob> saveJob in SaveJobs)
                 saveJob.Value.Execute();
         }
 
@@ -64,17 +64,17 @@ namespace testEasySave.Model.Services
             SaveJobs[name].Execute();
         }
 
-        private ISaveJob DeSerializeSaveJob(string json)
+        private IBackupJob DeSerializeSaveJob(string json)
         {
             if (json.Contains(Parameters.FullSaveJobType))
-                return JsonSerializer.Deserialize<FullSaveJob>(json);
+                return JsonSerializer.Deserialize<FullBackupJob>(json);
             else if (json.Contains(Parameters.differentialSaveJobType))
-                return JsonSerializer.Deserialize<DifferentialSaveJob>(json);
+                return JsonSerializer.Deserialize<DifferentialBackupJob>(json);
             else
-                throw new SaveJobTypeNotImplementedException();
+                throw new BackupJobTypeNotImplementedException();
         }
 
-        private string SerializeSaveJob(ISaveJob saveJob)
+        private string SerializeSaveJob(IBackupJob saveJob)
         {
             return JsonSerializer.Serialize(saveJob, new JsonSerializerOptions { WriteIndented = true });
         }

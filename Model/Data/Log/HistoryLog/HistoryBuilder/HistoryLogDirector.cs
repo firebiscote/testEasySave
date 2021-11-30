@@ -14,7 +14,7 @@ namespace testEasySave.Model.Data.Log.HistoryLog.HistoryBuilder
             Builder = new HistoryLogBuilder();
         }
 
-        public IHistoryLog GetNewHistoryLog(ISaveJob saveJob, FileInfo file, DateTime start)
+        public IHistoryLog GetNewHistoryLog(IBackupJob saveJob, FileInfo file, DateTime start)
         {
             Builder.Reset();
             Builder.BuildCopyDuration(start);

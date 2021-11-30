@@ -34,7 +34,7 @@ namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
         public override void BuildProgress(string[] remainingFiles, string sourceFile, string targetFile)
         {
             this.remainingFiles = remainingFiles;
-            Log.Progress = new SaveJobProgress();
+            Log.Progress = new BackupJobProgress();
             BuildProgressTotalFilesToCopy();
             BuildProgressTotalFilesToCopySize();
             BuildProgressActualSourceFileName(sourceFile);

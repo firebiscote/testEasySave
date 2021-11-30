@@ -9,7 +9,7 @@ namespace testEasySave.Model.Data.Log.StateLog
         public string State { get; set; }
         public int TotalTargetedFiles { get; set; }
         public long TotalTargetedFilesSize { get; set; }
-        public SaveJobProgress Progress { get; set; }
+        public BackupJobProgress Progress { get; set; }
 
         public StateLog() { }
     }

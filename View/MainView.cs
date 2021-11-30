@@ -10,6 +10,7 @@ namespace testEasySave.View
         public MainView()
         {
             SayHello();
+            SayIntroduction();
         }
 
         public void Start()
