@@ -10,71 +10,81 @@ namespace testEasySave.Model.Services
     public class BackupJobService : IService
     {
         public static BackupJobService Instance = new BackupJobService();
-        public FixedSizeDictionary<string, IBackupJob> SaveJobs { get; }
+        public FixedSizeDictionary<string, IBackupJob> BackupJobs { get; }
 
         private BackupJobService()
         {
-            SetSaveJobDirectory();
-            SaveJobs = new FixedSizeDictionary<string, IBackupJob>(Parameters.MaxSaveJob);
-            InitSaveJobs();
+            SetBackupJobDirectory();
+            BackupJobs = new FixedSizeDictionary<string, IBackupJob>(Parameters.MaxBackupJob);
+            InitBackupJobs();
         }
 
-        private void SetSaveJobDirectory()
+        private void SetBackupJobDirectory()
         {
-            new DirectoryInfo(Parameters.SaveJobDirectory).Create();
+            new DirectoryInfo(Parameters.BackupJobDirectory).Create();
         }
 
-        private void InitSaveJobs()
+        private void InitBackupJobs()
         {
-            foreach (string fileName in Directory.GetFiles(Parameters.SaveJobDirectory, Parameters.FilePattern))
+            foreach (string fileName in Directory.GetFiles(Parameters.BackupJobDirectory, Parameters.FilePattern))
             {
                 string json = File.ReadAllText(fileName);
-                IBackupJob saveJob = DeSerializeSaveJob(json);
-                SaveJobs.Add(saveJob.Name, saveJob);
+                IBackupJob saveJob = DeSerializeBackupJob(json);
+                BackupJobs.Add(saveJob.Name, saveJob);
             }
         }
 
         public void Create(IBackupJob saveJob)
         {
-            SaveJobs.Add(saveJob.Name, saveJob);
-            string fileName = Parameters.SaveJobDirectory + saveJob.Name + Parameters.FileType;
-            string json = SerializeSaveJob(saveJob);
+            BackupJobs.Add(saveJob.Name, saveJob);
+            string fileName = Parameters.BackupJobDirectory + saveJob.Name + Parameters.FileType;
+            string json = SerializeBackupJob(saveJob);
             File.WriteAllText(fileName, json);
         }
 
         public void DeleteAll() {
-            foreach (KeyValuePair<string, IBackupJob> saveJob in SaveJobs)
+            foreach (KeyValuePair<string, IBackupJob> saveJob in BackupJobs)
                 Delete(saveJob.Key);
         }
 
         public void Delete(string name)
         {
-            File.Delete(Parameters.SaveJobDirectory + name + Parameters.FileType);
-            SaveJobs.Remove(name);
+            DoesItExist(name);
+            File.Delete(Parameters.BackupJobDirectory + name + Parameters.FileType);
+            BackupJobs.Remove(name);
         }
 
         public void ExecuteAll()
         {
-            foreach (KeyValuePair<string, IBackupJob> saveJob in SaveJobs)
-                saveJob.Value.Execute();
+            foreach (KeyValuePair<string, IBackupJob> backupJob in BackupJobs)
+                backupJob.Value.Execute();
         }
 
         public void Execute(string name)
         {
-            SaveJobs[name].Execute();
+            DoesItExist(name);
+            BackupJobs[name].Execute();
         }
 
-        private IBackupJob DeSerializeSaveJob(string json)
+        private void DoesItExist(string name)
         {
-            if (json.Contains(Parameters.FullSaveJobType))
+            foreach (KeyValuePair<string, IBackupJob> backupJob in BackupJobs)
+                if (name == backupJob.Key)
+                    return;
+            throw new BackupJobNotExistException(name);
+        }
+
+        private IBackupJob DeSerializeBackupJob(string json)
+        {
+            if (json.Contains(Parameters.FullBackupJobType))
                 return JsonSerializer.Deserialize<FullBackupJob>(json);
-            else if (json.Contains(Parameters.differentialSaveJobType))
+            else if (json.Contains(Parameters.differentialBackupJobType))
                 return JsonSerializer.Deserialize<DifferentialBackupJob>(json);
             else
                 throw new BackupJobTypeNotImplementedException();
         }
 
-        private string SerializeSaveJob(IBackupJob saveJob)
+        private string SerializeBackupJob(IBackupJob saveJob)
         {
             return JsonSerializer.Serialize(saveJob, new JsonSerializerOptions { WriteIndented = true });
         }

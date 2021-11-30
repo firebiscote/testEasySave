@@ -33,7 +33,7 @@ namespace testEasySave.Model.Services
         public void Handle(object sender, CopyFileEventArgs args)
         {
             List<IStateLog> stateLogs = new List<IStateLog>();
-            foreach (IBackupJob saveJob in BackupJobService.Instance.SaveJobs.Values)
+            foreach (IBackupJob saveJob in BackupJobService.Instance.BackupJobs.Values)
             {
                 if (((IBackupJob)sender).Name == saveJob.Name)
                     stateLogs.Add(StateLogDirector.Instance.GetNewActiveStateLog(saveJob, args.File, args.RemainingFiles));

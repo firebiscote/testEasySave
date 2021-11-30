@@ -6,7 +6,7 @@ namespace testEasySave
     {
         // directory
         public static string BaseDirectory = @"..\\..\\";
-        public static string SaveJobDirectory = BaseDirectory + @"saveJob\\";
+        public static string BackupJobDirectory = BaseDirectory + @"saveJob\\";
         public static string LogFileDirectory = BaseDirectory + @"log\\";
         public static string HistoryLogDirectory = LogFileDirectory + @"historyLog\\";
         public static string StateLogDirectory = LogFileDirectory + @"stateLog\\";
@@ -45,12 +45,12 @@ namespace testEasySave
         public static string KeyErrorDelimiter = "'";
         public static string ArgumentErrorDelimiter = " ";
 
-        public static int MaxSaveJob = 5;
+        public static int MaxBackupJob = 5;
         public static string FileType = ".json";
         public static string FilePattern = "*" + FileType;
 
-        public static string SaveJobStart = " - ";
-        public static string SaveJobSeparator = " : ";
+        public static string BackupJobStart = " - ";
+        public static string BackupJobSeparator = " : ";
         public static string DirectorySeparator = " | ";
         public static string TypeSeparator = " -> ";
 
@@ -59,8 +59,8 @@ namespace testEasySave
         public static string JsonEnd = "]";
 
         // state or type
-        public const string FullSaveJobType = "full";
-        public const string differentialSaveJobType = "differential";
+        public const string FullBackupJobType = "full";
+        public const string differentialBackupJobType = "differential";
         public static string LogEndState = "END";
         public static string LogActiveState = "ACTIVE";
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using testEasySave.Exceptions;
 
 namespace testEasySave.Model.Services
@@ -70,6 +69,16 @@ namespace testEasySave.Model.Services
             {
                 Parameters.English => name + " already exists!",
                 Parameters.French => name + " existe déjà !",
+                _ => throw new NotImplementedLanguageException()
+            };
+        }
+
+        public string GetBackupJobNotExistExceptionMessage(string name)
+        {
+            return language switch
+            {
+                Parameters.English => name + " don't exists!",
+                Parameters.French => name + " n'existe pas !",
                 _ => throw new NotImplementedLanguageException()
             };
         }

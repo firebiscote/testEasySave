@@ -44,8 +44,8 @@ namespace testEasySave.Model
         private void Show()
         {
             string saveJobsList = "\n";
-            foreach (IBackupJob saveJob in BackupJobService.Instance.SaveJobs.Values)
-                saveJobsList += Parameters.SaveJobStart + saveJob.Name + Parameters.SaveJobSeparator + saveJob.SourceDirectory + Parameters.DirectorySeparator + saveJob.TargetDirectory + Parameters.TypeSeparator + saveJob.Type + "\n";
+            foreach (IBackupJob saveJob in BackupJobService.Instance.BackupJobs.Values)
+                saveJobsList += Parameters.BackupJobStart + saveJob.Name + Parameters.BackupJobSeparator + saveJob.SourceDirectory + Parameters.DirectorySeparator + saveJob.TargetDirectory + Parameters.TypeSeparator + saveJob.Type + "\n";
             throw new ShowException(saveJobsList);
         }
 

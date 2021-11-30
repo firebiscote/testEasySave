@@ -34,6 +34,10 @@ namespace testEasySave.Controller
             {
                 HandleKeyNotFoundException(exception);
             }
+            catch (BackupJobNotExistException exception)
+            {
+                HandleBackupJobNotExistException(exception);
+            }
             catch (ArgumentException exception)
             {
                 HandleArgumentException(exception);
@@ -81,6 +85,11 @@ namespace testEasySave.Controller
             // Get the wrong key
             string errorMessage = e.Message[(e.Message.IndexOf(Parameters.KeyErrorDelimiter) + 1)..e.Message.LastIndexOf(Parameters.KeyErrorDelimiter)];
             View.DisplayError(TraductionService.Instance.GetParameterExceptionMessage(errorMessage));
+        }
+
+        private void HandleBackupJobNotExistException(BackupJobNotExistException e)
+        {
+            View.DisplayError(TraductionService.Instance.GetBackupJobNotExistExceptionMessage(e.Message));
         }
 
         private void HandleArgumentException(ArgumentException e)
