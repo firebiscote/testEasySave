@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using testEasySave.Exceptions;
 
 namespace testEasySave.Model.Services
@@ -10,17 +11,17 @@ namespace testEasySave.Model.Services
         private readonly List<string> availableLanguages;
         private string language;
 
+        private TraductionService()
+        {
+            availableLanguages = new List<string>() { Parameters.English, Parameters.French };
+            language = availableLanguages[0];
+        }
+
         public void SetLanguage(string language)
         {
             if (!availableLanguages.Contains(language))
                 throw new NotImplementedLanguageException(language);
             this.language = language;
-        }
-
-        private TraductionService()
-        {
-            availableLanguages = new List<string>() { Parameters.English, Parameters.French };
-            language = Parameters.English;
         }
 
         public string GetHelpMessage()
@@ -95,7 +96,7 @@ namespace testEasySave.Model.Services
 
         public string GetNotImplementedLanguageExceptionMessage(string language)
         {
-            return language switch
+            return this.language switch
             {
                 Parameters.English => "The language '" + language + "' is not available!",
                 Parameters.French => "Le langage '" + language + "' n'est pas disponible !",
