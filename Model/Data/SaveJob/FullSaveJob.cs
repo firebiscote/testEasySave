@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using testEasySave.Model.Data.SaveJob;
 using testEasySave.Model.Data.ToolBox;
 

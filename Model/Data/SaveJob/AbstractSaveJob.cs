@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using testEasySave.Model.Data.Job;
+using testEasySave.Model.Data.ToolBox;
 
 namespace testEasySave.Model.Data.SaveJob
 {
@@ -21,7 +23,7 @@ namespace testEasySave.Model.Data.SaveJob
                 directory.Create();
         }
 
-        public List<string> GetFiles()
+        protected List<string> GetFiles()
         {
             return Directory.GetFiles(SourceDirectory, "*", SearchOption.AllDirectories).ToList();
         }

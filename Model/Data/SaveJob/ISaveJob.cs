@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace testEasySave.Model.Data.Job
+﻿namespace testEasySave.Model.Data.Job
 {
     public interface ISaveJob
     {
@@ -10,7 +8,5 @@ namespace testEasySave.Model.Data.Job
         public string Type { get; set; }
 
         public void Execute();
-
-        public List<string> GetFiles();
     }
 }
