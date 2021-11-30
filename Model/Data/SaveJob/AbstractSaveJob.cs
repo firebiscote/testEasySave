@@ -18,7 +18,8 @@ namespace testEasySave.Model.Data.SaveJob
 
         protected void CreateSubDirectory(string fileName)
         {
-            DirectoryInfo directory = new DirectoryInfo(TargetDirectory + fileName[(SourceDirectory.Length - 1)..fileName.LastIndexOf("\\")]);
+            // Get the file subdirectory
+            DirectoryInfo directory = new DirectoryInfo(TargetDirectory + fileName[(TargetDirectory.Length - 1)..fileName.LastIndexOf("\\")]);
             if (!directory.Exists)
                 directory.Create();
         }

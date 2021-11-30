@@ -42,7 +42,8 @@ namespace testEasySave
 
         public static string CommandSeparator = " ";
         public static string ArgumentError = "key";
-        public static string ErrorArgumentDelimiter = "'";
+        public static string KeyErrorDelimiter = "'";
+        public static string ArgumentErrorDelimiter = " ";
 
         public static int MaxSaveJob = 5;
         public static string FileType = ".json";

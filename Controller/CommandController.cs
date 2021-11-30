@@ -18,7 +18,6 @@ namespace testEasySave.Controller
         public void Transmit(string command)
         {
             ParseCommand(command);
-            bool isException = false;
             try
             {
                 Model.Process(action, arguments);
@@ -55,8 +54,7 @@ namespace testEasySave.Controller
             {
                 HandleException(exception);
             }
-            if (!isException)
-                View.DisplaySuccess(TraductionService.Instance.GetSuccessMessage());
+            View.DisplaySuccess(TraductionService.Instance.GetSuccessMessage());
         }
 
         private void ParseCommand(string command)
@@ -64,7 +62,7 @@ namespace testEasySave.Controller
             List<string> commandSplited = command.Split(Parameters.CommandSeparator).ToList();
             action = commandSplited[0];
             arguments = new Dictionary<string, string>();
-            for (int i = 1; i < commandSplited.Count()-1; i += 2)
+            for (int i = 1; i < commandSplited.Count() - 1; i += 2)
                 arguments.Add(commandSplited[i], commandSplited[i + 1]);
         }
 
@@ -80,13 +78,15 @@ namespace testEasySave.Controller
 
         private void HandleKeyNotFoundException(KeyNotFoundException e)
         {
-            string errorMessage = e.Message[(e.Message.IndexOf(Parameters.ErrorArgumentDelimiter) + 1)..e.Message.LastIndexOf(Parameters.ErrorArgumentDelimiter)];
+            // Get the wrong key
+            string errorMessage = e.Message[(e.Message.IndexOf(Parameters.KeyErrorDelimiter) + 1)..e.Message.LastIndexOf(Parameters.KeyErrorDelimiter)];
             View.DisplayError(TraductionService.Instance.GetParameterExceptionMessage(errorMessage));
         }
 
         private void HandleArgumentException(ArgumentException e)
         {
-            string name = e.Message[e.Message.LastIndexOf(' ')..];
+            // Get the wrong argument
+            string name = e.Message[e.Message.LastIndexOf(Parameters.ArgumentErrorDelimiter)..];
             View.DisplayError(TraductionService.Instance.GetArgumentExceptionMessage(name));
         }
 
