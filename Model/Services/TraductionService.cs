@@ -37,7 +37,7 @@ namespace testEasySave.Model.Services
         {
             return language switch
             {
-                Parameters.English => "Successfull operation!",
+                Parameters.English => "Successful operation!",
                 Parameters.French => "Opération réussie !",
                 _ => throw new NotImplementedLanguageException()
             };
@@ -47,7 +47,7 @@ namespace testEasySave.Model.Services
         {
             return language switch
             {
-                Parameters.English => "An error has occure!",
+                Parameters.English => "An error has occurred!",
                 Parameters.French => "Une erreur s'est produite !",
                 _ => throw new NotImplementedLanguageException()
             };
@@ -67,7 +67,7 @@ namespace testEasySave.Model.Services
         {
             return language switch
             {
-                Parameters.English => name + " already exist!",
+                Parameters.English => name + " already exists!",
                 Parameters.French => name + " existe déjà !",
                 _ => throw new NotImplementedLanguageException()
             };
@@ -77,7 +77,7 @@ namespace testEasySave.Model.Services
         {
             return language switch
             {
-                Parameters.English => "There is too much save job! Please delete one before creation!",
+                Parameters.English => "There are too many save jobs! Please delete one before creation!",
                 Parameters.French => "Il y a trop de travaux de travail de sauvegarde ! Veuillez en supprimer un avant la création !",
                 _ => throw new NotImplementedLanguageException()
             };

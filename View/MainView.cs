@@ -24,6 +24,11 @@ namespace testEasySave.View
                 Console.WriteLine(line);
         }
 
+        private void SayIntroduction()
+        {
+            Console.WriteLine(Parameters.Introduction);
+        }
+
         private void ShowAllSaveJobs()
         {
             Controller.Transmit(Parameters.Show);

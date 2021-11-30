@@ -72,6 +72,7 @@ namespace testEasySave
                                                       @" |______\__,_|___/\__, | |_____/ \__,_| \_/ \___|  |_(_)___(_)___/ ",
                                                       @"                   __/ |                                           ",
                                                        "                  |___/                                            "};
+        public static string Introduction = "Welcome to your backup software ! Please type 'help' for more information !";
         public static string HelpMessage = "________________________________________________________________________\n" +
                                             TraductionService.Instance.GetHelpMessage() +
                                            "\n=> " + Show + " {" + Name + " name}" + 
