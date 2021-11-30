@@ -14,7 +14,7 @@ namespace testEasySave.View
 
         public void Start()
         {
-            ShowAllSaveJob();
+            ShowAllSaveJobs();
             WaitForInstruction();
         }
 
@@ -24,7 +24,7 @@ namespace testEasySave.View
                 Console.WriteLine(line);
         }
 
-        private void ShowAllSaveJob()
+        private void ShowAllSaveJobs()
         {
             Controller.Transmit(Parameters.Show);
         }
