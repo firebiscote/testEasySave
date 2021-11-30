@@ -63,6 +63,16 @@ namespace testEasySave.Model.Services
             };
         }
 
+        public string GetTooManyArgumentsExceptionMessage()
+        {
+            return language switch
+            {
+                Parameters.English => "There are too many arguments!",
+                Parameters.French => "Il y a trop d'arguments !",
+                _ => throw new NotImplementedLanguageException()
+            };
+        }
+
         public string GetArgumentExceptionMessage(string name)
         {
             return language switch

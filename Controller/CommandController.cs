@@ -30,6 +30,10 @@ namespace testEasySave.Controller
             {
                 HandleNotEnoughSpaceException();
             }
+            catch (TooManyArgumentsException)
+            {
+                HandleTooManyArgumentsException();
+            }
             catch (KeyNotFoundException exception)
             {
                 HandleKeyNotFoundException(exception);
@@ -78,6 +82,11 @@ namespace testEasySave.Controller
         private void HandleNotEnoughSpaceException()
         {
             View.DisplayError(TraductionService.Instance.GetNotEnoughSpaceExceptionMessage());
+        }
+
+        private void HandleTooManyArgumentsException()
+        {
+            View.DisplayError(TraductionService.Instance.GetTooManyArgumentsExceptionMessage());
         }
 
         private void HandleKeyNotFoundException(KeyNotFoundException e)

@@ -53,7 +53,7 @@ namespace testEasySave.Model.Services
 
         private string SerializeStateLogs(List<IStateLog> logs)
         {
-            return JsonSerializer.Serialize(logs, new JsonSerializerOptions { WriteIndented = true });
+            return JsonSerializer.Serialize(logs, Parameters.SerializerOptions);
         }
     }
 }

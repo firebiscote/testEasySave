@@ -1,4 +1,7 @@
-﻿using testEasySave.Model.Services;
+﻿using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
+using testEasySave.Model.Services;
 
 namespace testEasySave
 {
@@ -6,7 +9,7 @@ namespace testEasySave
     {
         // directory
         public static string BaseDirectory = @"..\\..\\";
-        public static string BackupJobDirectory = BaseDirectory + @"saveJob\\";
+        public static string BackupJobDirectory = BaseDirectory + @"backupJob\\";
         public static string LogFileDirectory = BaseDirectory + @"log\\";
         public static string HistoryLogDirectory = LogFileDirectory + @"historyLog\\";
         public static string StateLogDirectory = LogFileDirectory + @"stateLog\\";
@@ -14,12 +17,19 @@ namespace testEasySave
 
         // command keyword
         public static string Show = "show";
+        public static int TotalShowArguments = 0;
         public static string Create = "create";
+        public static int TotalCreateArguments = 4;
         public static string Delete = "delete";
+        public static int TotalDeleteArguments = 1;
         public static string Execute = "execute";
+        public static int TotalExecuteArguments = 1;
         public static string Language = "language";
+        public static int TotalLanguageArguments = 1;
         public static string Help = "help";
+        public static int TotalHelpArguments = 0;
         public static string Quit = "quit";
+        public static int TotalQuitArguments = 0;
 
         // command arguments
         public static string Name = "-n";
@@ -84,5 +94,12 @@ namespace testEasySave
                                            "\n=> " + Quit +
                                            "\n________________________________________________________________________";
         public static string CommandIndent = "=> ";
+
+        // serialize option
+        public static JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
+        {
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+            WriteIndented = true
+        };
     }
 }

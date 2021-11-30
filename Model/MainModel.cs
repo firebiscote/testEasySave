@@ -43,6 +43,7 @@ namespace testEasySave.Model
 
         private void Show()
         {
+            AreThereTooManyArguments(Parameters.TotalShowArguments);
             string saveJobsList = "\n";
             foreach (IBackupJob saveJob in BackupJobService.Instance.BackupJobs.Values)
                 saveJobsList += Parameters.BackupJobStart + saveJob.Name + Parameters.BackupJobSeparator + saveJob.SourceDirectory + Parameters.DirectorySeparator + saveJob.TargetDirectory + Parameters.TypeSeparator + saveJob.Type + "\n";
@@ -51,12 +52,14 @@ namespace testEasySave.Model
 
         private void Create()
         {
+            AreThereTooManyArguments(Parameters.TotalCreateArguments);
             IBackupJob newSaveJob = BackupJobDirector.Instance.GetNewSaveJob(args[Parameters.Name], args[Parameters.SourceDirectory], args[Parameters.TargetDirectory], args[Parameters.Type]);
             BackupJobService.Instance.Create(newSaveJob);
         }
 
         private void Delete()
         {
+            AreThereTooManyArguments(Parameters.TotalDeleteArguments);
             if (args.Count == 0)
                 BackupJobService.Instance.DeleteAll();
             else
@@ -65,6 +68,7 @@ namespace testEasySave.Model
 
         private void Execute()
         {
+            AreThereTooManyArguments(Parameters.TotalExecuteArguments);
             if (args.Count == 0)
                 BackupJobService.Instance.ExecuteAll();
             else
@@ -73,17 +77,26 @@ namespace testEasySave.Model
 
         private void SetLang()
         {
+            AreThereTooManyArguments(Parameters.TotalLanguageArguments);
             TraductionService.Instance.SetLanguage(args[Parameters.Lang]);
         }
 
         private void Help()
         {
+            AreThereTooManyArguments(Parameters.TotalHelpArguments);
             throw new HelpException(Parameters.HelpMessage);
         }
 
         private void Quit()
         {
+            AreThereTooManyArguments(Parameters.TotalQuitArguments);
             Environment.Exit(0);
+        }
+
+        private void AreThereTooManyArguments(int reference)
+        {
+            if (args.Count > reference)
+                throw new TooManyArgumentsException();
         }
     }
 }

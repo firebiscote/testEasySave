@@ -86,7 +86,7 @@ namespace testEasySave.Model.Services
 
         private string SerializeBackupJob(IBackupJob saveJob)
         {
-            return JsonSerializer.Serialize(saveJob, new JsonSerializerOptions { WriteIndented = true });
+            return JsonSerializer.Serialize(saveJob, Parameters.SerializerOptions);
         }
     }
 }
