@@ -1,9 +1,9 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using testEasySave.Model.Services;
+using EasySave.Model.Services;
 
-namespace testEasySave
+namespace EasySave
 {
     public static class Parameters
     {

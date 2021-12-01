@@ -1,7 +1,7 @@
 ﻿using System;
-using testEasySave.Controller;
+using EasySave.Controller;
 
-namespace testEasySave.View
+namespace EasySave.View
 {
     public interface IView
     {

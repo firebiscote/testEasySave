@@ -1,4 +1,4 @@
-﻿namespace testEasySave
+﻿namespace EasySave
 {
     public class Program
     {

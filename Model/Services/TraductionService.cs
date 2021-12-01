@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using testEasySave.Exceptions;
+using EasySave.Exceptions;
 
-namespace testEasySave.Model.Services
+namespace EasySave.Model.Services
 {
     public class TraductionService : IService
     {

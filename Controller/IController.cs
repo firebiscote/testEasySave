@@ -1,7 +1,7 @@
-﻿using testEasySave.Model;
-using testEasySave.View;
+﻿using EasySave.Model;
+using EasySave.View;
 
-namespace testEasySave.Controller
+namespace EasySave.Controller
 {
     public interface IController
     {

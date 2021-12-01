@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.ToolBox;
+using EasySave.Model.Data.Job;
+using EasySave.Model.Data.ToolBox;
 
-namespace testEasySave.Model.Services
+namespace EasySave.Model.Services
 {
     public class GlobalLogService : ILogService
     {

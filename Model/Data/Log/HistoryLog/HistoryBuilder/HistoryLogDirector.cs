@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using testEasySave.Model.Data.Job;
+using EasySave.Model.Data.Job;
 
-namespace testEasySave.Model.Data.Log.HistoryLog.HistoryBuilder
+namespace EasySave.Model.Data.Log.HistoryLog.HistoryBuilder
 {
     public class HistoryLogDirector
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace testEasySave.Model
+namespace EasySave.Model
 {
     public interface IModel
     {

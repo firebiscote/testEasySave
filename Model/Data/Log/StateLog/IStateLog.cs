@@ -1,6 +1,6 @@
-﻿using testEasySave.Model.Data.Log.StateLog.Progress;
+﻿using EasySave.Model.Data.Log.StateLog.Progress;
 
-namespace testEasySave.Model.Data.Log.StateLog
+namespace EasySave.Model.Data.Log.StateLog
 {
     public interface IStateLog
     {

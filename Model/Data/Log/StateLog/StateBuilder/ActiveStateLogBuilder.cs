@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using testEasySave.Model.Data.Log.StateLog.Progress;
+using EasySave.Model.Data.Log.StateLog.Progress;
 
-namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
+namespace EasySave.Model.Data.Log.StateLog.StateBuilder
 {
     public class ActiveStateLogBuilder : AbstractStateLogBuilder
     {

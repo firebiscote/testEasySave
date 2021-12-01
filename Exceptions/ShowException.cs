@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace testEasySave.Exceptions
+namespace EasySave.Exceptions
 {
     public class ShowException : Exception
     {

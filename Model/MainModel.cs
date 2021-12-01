@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using testEasySave.Exceptions;
-using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.BackupJob.BackupJobBuilder;
-using testEasySave.Model.Services;
+using EasySave.Exceptions;
+using EasySave.Model.Data.Job;
+using EasySave.Model.Data.BackupJob.BackupJobBuilder;
+using EasySave.Model.Services;
 
-namespace testEasySave.Model
+namespace EasySave.Model
 {
     public class MainModel : IModel
     {

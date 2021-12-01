@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.Log.StateLog;
-using testEasySave.Model.Data.Log.StateLog.StateBuilder;
-using testEasySave.Model.Data.ToolBox;
+using EasySave.Model.Data.Job;
+using EasySave.Model.Data.Log.StateLog;
+using EasySave.Model.Data.Log.StateLog.StateBuilder;
+using EasySave.Model.Data.ToolBox;
 
-namespace testEasySave.Model.Services
+namespace EasySave.Model.Services
 {
     public class StateLogService : ILogService
     {

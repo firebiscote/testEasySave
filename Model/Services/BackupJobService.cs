@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
-using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.ToolBox;
-using testEasySave.Exceptions;
+using EasySave.Model.Data.Job;
+using EasySave.Model.Data.ToolBox;
+using EasySave.Exceptions;
 
-namespace testEasySave.Model.Services
+namespace EasySave.Model.Services
 {
     public class BackupJobService : IService
     {

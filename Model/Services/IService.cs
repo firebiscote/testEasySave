@@ -1,4 +1,4 @@
-﻿namespace testEasySave.Model.Services
+﻿namespace EasySave.Model.Services
 {
     public interface IService
     {

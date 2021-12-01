@@ -1,6 +1,6 @@
-﻿using testEasySave.Model.Data.ToolBox;
+﻿using EasySave.Model.Data.ToolBox;
 
-namespace testEasySave.Model.Services
+namespace EasySave.Model.Services
 {
     public interface ILogService : IService
     {

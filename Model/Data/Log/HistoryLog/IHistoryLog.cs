@@ -1,4 +1,4 @@
-﻿namespace testEasySave.Model.Data.Log.HistoryLog
+﻿namespace EasySave.Model.Data.Log.HistoryLog
 {
     public interface IHistoryLog
     {

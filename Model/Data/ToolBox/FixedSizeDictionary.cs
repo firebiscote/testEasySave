@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using testEasySave.Exceptions;
+using EasySave.Exceptions;
 
-namespace testEasySave.Model.Data.ToolBox
+namespace EasySave.Model.Data.ToolBox
 {
     public class FixedSizeDictionary<TKey, TValue> : Dictionary<TKey, TValue>
     {
