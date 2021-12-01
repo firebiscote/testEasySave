@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace testEasySave.Model.Data.ToolBox
+namespace EasySave.Model.Data.ToolBox
 {
     public class CopyFileEventArgs : EventArgs
     {

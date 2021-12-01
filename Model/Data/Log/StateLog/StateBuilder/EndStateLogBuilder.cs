@@ -1,4 +1,4 @@
-﻿namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
+﻿namespace EasySave.Model.Data.Log.StateLog.StateBuilder
 {
     public class EndStateLogBuilder : AbstractStateLogBuilder
     {

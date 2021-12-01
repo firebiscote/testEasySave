@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using testEasySave.Model.Data.Job;
+using EasySave.Model.Data.Job;
 
-namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
+namespace EasySave.Model.Data.Log.StateLog.StateBuilder
 {
     public class StateLogDirector
     {

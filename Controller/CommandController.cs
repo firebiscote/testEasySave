@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using testEasySave.Exceptions;
-using testEasySave.Model;
-using testEasySave.Model.Services;
-using testEasySave.View;
+using EasySave.Exceptions;
+using EasySave.Model;
+using EasySave.Model.Services;
+using EasySave.View;
 
-namespace testEasySave.Controller
+namespace EasySave.Controller
 {
     public class CommandController : IController
     {

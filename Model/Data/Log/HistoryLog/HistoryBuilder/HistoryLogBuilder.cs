@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace testEasySave.Model.Data.Log.HistoryLog.HistoryBuilder
+namespace EasySave.Model.Data.Log.HistoryLog.HistoryBuilder
 {
     public class HistoryLogBuilder : IHistoryLogBuilder
     {

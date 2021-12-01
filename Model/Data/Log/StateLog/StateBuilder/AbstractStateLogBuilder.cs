@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace testEasySave.Model.Data.Log.StateLog.StateBuilder
+namespace EasySave.Model.Data.Log.StateLog.StateBuilder
 {
     public abstract class AbstractStateLogBuilder : IStateLogBuilder
     {

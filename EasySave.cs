@@ -1,8 +1,8 @@
-﻿using testEasySave.View;
-using testEasySave.Controller;
-using testEasySave.Model;
+﻿using EasySave.View;
+using EasySave.Controller;
+using EasySave.Model;
 
-namespace testEasySave
+namespace EasySave
 {
     public class EasySave
     {

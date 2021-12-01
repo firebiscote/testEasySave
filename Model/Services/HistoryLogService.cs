@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.Log.HistoryLog;
-using testEasySave.Model.Data.Log.HistoryLog.HistoryBuilder;
-using testEasySave.Model.Data.ToolBox;
+using EasySave.Model.Data.Job;
+using EasySave.Model.Data.Log.HistoryLog;
+using EasySave.Model.Data.Log.HistoryLog.HistoryBuilder;
+using EasySave.Model.Data.ToolBox;
 
-namespace testEasySave.Model.Services
+namespace EasySave.Model.Services
 {
     public class HistoryLogService : ILogService
     {
