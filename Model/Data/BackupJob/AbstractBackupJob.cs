@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using testEasySave.Model.Data.Job;
-using testEasySave.Model.Data.ToolBox;
+using EasySave.Model.Data.Job;
+using EasySave.Model.Data.ToolBox;
 
-namespace testEasySave.Model.Data.BackupJob
+namespace EasySave.Model.Data.BackupJob
 {
     public abstract class AbstractBackupJob : IBackupJob
     {

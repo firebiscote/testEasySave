@@ -1,7 +1,7 @@
-﻿using testEasySave.Exceptions;
-using testEasySave.Model.Data.Job;
+﻿using EasySave.Exceptions;
+using EasySave.Model.Data.Job;
 
-namespace testEasySave.Model.Data.BackupJob.BackupJobBuilder
+namespace EasySave.Model.Data.BackupJob.BackupJobBuilder
 {
     public class BackupJobDirector
     {

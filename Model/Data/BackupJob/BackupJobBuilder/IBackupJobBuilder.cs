@@ -1,6 +1,6 @@
-﻿using testEasySave.Model.Data.Job;
+﻿using EasySave.Model.Data.Job;
 
-namespace testEasySave.Model.Data.BackupJob.BackupJobBuilder
+namespace EasySave.Model.Data.BackupJob.BackupJobBuilder
 {
     public interface IBackupJobBuilder
     {

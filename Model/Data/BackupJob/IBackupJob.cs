@@ -1,4 +1,4 @@
-﻿namespace testEasySave.Model.Data.Job
+﻿namespace EasySave.Model.Data.Job
 {
     public interface IBackupJob
     {

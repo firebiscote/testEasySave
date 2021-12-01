@@ -1,4 +1,4 @@
-﻿namespace testEasySave.Model.Data.Log.StateLog.Progress
+﻿namespace EasySave.Model.Data.Log.StateLog.Progress
 {
     public class BackupJobProgress
     {
